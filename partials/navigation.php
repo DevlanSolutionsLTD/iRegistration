@@ -13,7 +13,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">Home</a>
+                    <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="registras.php" class="nav-link">Registras</a>
