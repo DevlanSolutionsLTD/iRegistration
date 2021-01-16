@@ -7,6 +7,7 @@
 <!-- DataTables -->
 <script src="../public/plugins/datatables/jquery.dataTables.js"></script>
 <script src="../public/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
 <!-- Initialize Em -->
 <script>
     $(function() {
