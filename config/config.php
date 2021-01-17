@@ -2,7 +2,7 @@
     $dbuser="root";
     $dbpass="";
     $host="localhost";
-    $db="ezana_lms";
+    $db="iRegistration";
     $mysqli=new mysqli($host,$dbuser, $dbpass, $db);
     
 ?>
