@@ -1,12 +1,12 @@
 <?php
 session_start();
-include('../configs/config.php');
+include('../config/config.php');
 
 if (isset($_POST['login'])) {
     $auth_email = $_POST['auth_email'];
     $auth_permission = $_POST['auth_permission'];
     $auth_password = sha1(md5($_POST['auth_password'])); //double encrypt to increase security
-    $stmt = $mysqli->prepare("SELECT auth_email, auth_password, auth_permission, auth_id,  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?");
+    $stmt = $mysqli->prepare("SELECT auth_email, auth_password, auth_permission, auth_id  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?");
     $stmt->bind_param('ssi', $auth_email, $auth_password, $auth_permission); //bind fetched parameters
     $stmt->execute(); //execute bind 
     $stmt->bind_result($auth_email, $auth_password, $auth_permission, $auth_id); //bind result
