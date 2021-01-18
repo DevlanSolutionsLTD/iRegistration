@@ -31,7 +31,7 @@ require_once('../partials/head.php');
                                 <div class="info-box-content">
                                     <span class="info-box-text">Registered Births</span>
                                     <span class="info-box-number">
-                                        <?php echo $registered_births;?>
+                                        <?php echo $registered_births; ?>
                                     </span>
                                 </div>
                             </div>
@@ -43,12 +43,12 @@ require_once('../partials/head.php');
                                 <div class="info-box-content">
                                     <span class="info-box-text">Registered Deaths</span>
                                     <span class="info-box-number">
-                                        <?php echo $registered_deaths;?>
+                                        <?php echo $registered_deaths; ?>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Death And Births Rate Chart -->
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="card">
@@ -63,7 +63,7 @@ require_once('../partials/head.php');
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Monthly Births And Deaths Reported In <?php echo date('Y');?></h3>
+                                    <h3 class="card-title">Monthly Births And Deaths Reported In <?php echo date('Y'); ?></h3>
                                 </div>
                                 <canvas id="mortalityRate" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
@@ -73,10 +73,9 @@ require_once('../partials/head.php');
                         <div class="col-12 col-sm-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Monthly Mortalities And Births In <?php echo date('Y');?></h3>
+                                    <h3 class="card-title">Monthly Mortalities And Births In <?php echo date('Y'); ?></h3>
                                 </div>
-<!--                                 <canvas id="monthlyMortalityAndBirthRates" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
- -->                                <div id="chartContainer" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></div>
+                                <div id="MortalityRatesXBirthRates" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></div>
                             </div>
                         </div>
                     </div>

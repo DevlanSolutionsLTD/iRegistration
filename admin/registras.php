@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once('../config/config.php');
+require_once('../config/checklogin.php');
 require_once('../partials/head.php');
 ?>
 
@@ -10,7 +13,7 @@ require_once('../partials/head.php');
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-left text-dark">iRegistration Registrars</h1>
+                            <h1 class="m-0 text-left text-dark">Registrars</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -30,23 +33,35 @@ require_once('../partials/head.php');
                             <table id="dt-1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>Full Name</th>
+                                        <th>ID No</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Phone No</th>
+                                        <th>Address</th>
+                                        <th>Manage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                    </tr>
+                                    <?php
+                                    $ret = "SELECT * FROM `users` ";
+                                    $stmt = $mysqli->prepare($ret);
+                                    $stmt->execute(); //ok
+                                    $res = $stmt->get_result();
+                                    $cnt = 1;
+                                    while ($users = $res->fetch_object()) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $users->name;?></td>
+                                            <td><?php echo $users->national_idno;?></td>
+                                            <td><?php echo $users->sex;?></td>
+                                            <td><?php echo $users->email;?></td>
+                                            <td><?php echo $users->phone;?></td>
+                                            <td><?php echo $users->addr;?></td>
+                                            <td></td>
+                                        </tr>
+                                    <?php
+                                    } ?>
                                 </tbody>
                             </table>
                             <br>

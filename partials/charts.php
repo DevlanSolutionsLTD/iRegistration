@@ -66,7 +66,7 @@
 
     window.onload = function() {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var chart = new CanvasJS.Chart("MortalityRatesXBirthRates", {
             animationEnabled: true,
             theme: "light2",
             axisX: {
@@ -84,113 +84,115 @@
                 itemclick: toggleDataSeries
             },
             data: [{
+                    /* Mortality Rate On Columns */
                     type: "column",
                     name: "Mortality Rate",
                     showInLegend: true,
                     xValueFormatString: "MMMM YYYY",
                     yValueFormatString: "#,##0",
                     dataPoints: [{
-                            x: new Date(<?php echo date('Y');?>, 0),
-                            y: <?php echo $jan;?>
+                            x: new Date(<?php echo date('Y'); ?>, 0),
+                            y: <?php echo $jan; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 1),
-                            y: <?php echo $feb;?>
+                            x: new Date(<?php echo date('Y'); ?>, 1),
+                            y: <?php echo $feb; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 2),
-                            y: <?php echo $mar;?>
+                            x: new Date(<?php echo date('Y'); ?>, 2),
+                            y: <?php echo $mar; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 3),
-                            y: <?php echo $apr;?>,
+                            x: new Date(<?php echo date('Y'); ?>, 3),
+                            y: <?php echo $apr; ?>,
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 4),
-                            y: <?php echo $may;?>
+                            x: new Date(<?php echo date('Y'); ?>, 4),
+                            y: <?php echo $may; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 5),
-                            y: <?php echo $jun;?>
+                            x: new Date(<?php echo date('Y'); ?>, 5),
+                            y: <?php echo $jun; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 6),
-                            y: <?php echo $jul;?>
+                            x: new Date(<?php echo date('Y'); ?>, 6),
+                            y: <?php echo $jul; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 7),
-                            y: <?php echo $aug;?>
+                            x: new Date(<?php echo date('Y'); ?>, 7),
+                            y: <?php echo $aug; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 8),
-                            y: <?php echo $sep;?>
+                            x: new Date(<?php echo date('Y'); ?>, 8),
+                            y: <?php echo $sep; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 9),
-                            y: <?php echo $oct;?>
+                            x: new Date(<?php echo date('Y'); ?>, 9),
+                            y: <?php echo $oct; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 10),
-                            y: <?php echo $nov;?>
+                            x: new Date(<?php echo date('Y'); ?>, 10),
+                            y: <?php echo $nov; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 11),
-                            y: <?php echo $dec;?>
+                            x: new Date(<?php echo date('Y'); ?>, 11),
+                            y: <?php echo $dec; ?>
                         }
                     ]
                 },
                 {
                     type: "line",
+                    /* Birth Rates On Line */
                     name: "Birth Rates",
                     showInLegend: true,
                     yValueFormatString: "#,##0",
                     dataPoints: [{
-                            x: new Date(<?php echo date('Y');?>, 0),
-                            y: <?php echo $Jan;?>
+                            x: new Date(<?php echo date('Y'); ?>, 0),
+                            y: <?php echo $Jan; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 1),
-                            y: <?php echo $Feb;?>
+                            x: new Date(<?php echo date('Y'); ?>, 1),
+                            y: <?php echo $Feb; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 2),
-                            y: <?php echo $Mar;?>
+                            x: new Date(<?php echo date('Y'); ?>, 2),
+                            y: <?php echo $Mar; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 3),
-                            y: <?php echo $Apr;?>
+                            x: new Date(<?php echo date('Y'); ?>, 3),
+                            y: <?php echo $Apr; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 4),
-                            y: <?php echo $May;?>
+                            x: new Date(<?php echo date('Y'); ?>, 4),
+                            y: <?php echo $May; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 5),
-                            y: <?php echo $Jun;?>
+                            x: new Date(<?php echo date('Y'); ?>, 5),
+                            y: <?php echo $Jun; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 6),
-                            y: <?php echo $Jul;?>
+                            x: new Date(<?php echo date('Y'); ?>, 6),
+                            y: <?php echo $Jul; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 7),
-                            y: <?php echo $Aug;?>
+                            x: new Date(<?php echo date('Y'); ?>, 7),
+                            y: <?php echo $Aug; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 8),
-                            y: <?php echo $Sep;?>
+                            x: new Date(<?php echo date('Y'); ?>, 8),
+                            y: <?php echo $Sep; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 9),
-                            y: <?php echo $Oct;?>
+                            x: new Date(<?php echo date('Y'); ?>, 9),
+                            y: <?php echo $Oct; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 10),
-                            y: <?php echo $Nov;?>
+                            x: new Date(<?php echo date('Y'); ?>, 10),
+                            y: <?php echo $Nov; ?>
                         },
                         {
-                            x: new Date(<?php echo date('Y');?>, 11),
-                            y: <?php echo $Dec;?>
+                            x: new Date(<?php echo date('Y'); ?>, 11),
+                            y: <?php echo $Dec; ?>
                         }
                     ]
                 }
