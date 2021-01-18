@@ -5,6 +5,104 @@ require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 
 /* Import Registras Files From Excel Sheets */
+use DevLanDataAPI\DataSource;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+require_once('../config/DataSource.php');
+$db = new DataSource();
+$conn = $db->getConnection();
+require_once('../vendor/autoload.php');
+
+if (isset($_POST["upload"])) {
+
+    $allowedFileType = [
+        'application/vnd.ms-excel',
+        'text/xls',
+        'text/xlsx',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ];
+
+    /* Where Magic Happens */
+
+    if (in_array($_FILES["file"]["type"], $allowedFileType)) {
+
+        $targetPath = '../public/uploads/xls/' . $_FILES['file']['name'];
+        move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+
+        $Reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $spreadSheet = $Reader->load($targetPath);
+        $excelSheet = $spreadSheet->getActiveSheet();
+        $spreadSheetAry = $excelSheet->toArray();
+        $sheetCount = count($spreadSheetAry);
+
+        for ($i = 1; $i <= $sheetCount; $i++) {
+
+            $id = "";
+            if (isset($spreadSheetAry[$i][0])) {
+                $id = mysqli_real_escape_string($conn, $spreadSheetAry[$i][0]);
+            }
+
+            $name = "";
+            if (isset($spreadSheetAry[$i][1])) {
+                $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][1]);
+            }
+
+            $national_idno = "";
+            if (isset($spreadSheetAry[$i][2])) {
+                $national_idno = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
+            }
+
+            $phone = "";
+            if (isset($spreadSheetAry[$i][3])) {
+                $phone = mysqli_real_escape_string($conn, $spreadSheetAry[$i][3]);
+            }
+
+            $email = "";
+            if (isset($spreadSheetAry[$i][4])) {
+                $email = mysqli_real_escape_string($conn, $spreadSheetAry[$i][4]);
+            }
+
+            $addr = "";
+            if (isset($spreadSheetAry[$i][5])) {
+                $addr = mysqli_real_escape_string($conn, $spreadSheetAry[$i][5]);
+            }
+
+            $sex = "";
+            if (isset($spreadSheetAry[$i][6])) {
+                $sex = mysqli_real_escape_string($conn, $spreadSheetAry[$i][6]);
+            }
+
+            $created_at = "";
+            if (isset($spreadSheetAry[$i][7])) {
+                $created_at = mysqli_real_escape_string($conn, $spreadSheetAry[$i][7]);
+            }
+           
+
+            if (!empty($name) || !empty($national_idno) || !empty($email) || !empty($phone) || !empty($sex)) {
+                $query = "INSERT INTO users (id, name, national_idno, phone, email, addr, sex, created_at) VALUES(?,?,?,?,?,?,?,?)";
+                $paramType = "ssssssss";
+                $paramArray = array(
+                    $id,
+                    $name,
+                    $national_idno,
+                    $phone,
+                    $email,
+                    $addr,
+                    $sex,
+                    $created_at
+                );
+                $insertId = $db->insert($query, $paramType, $paramArray);
+                if (!empty($insertId)) {
+                    $err = "Error Occured While Importing Data";
+                } else {
+                    $success = "Data Imported" && header("refresh:1; url=registras.php") ;
+                }
+            }
+        }
+    } else {
+        $info = "Invalid File Type. Upload Excel File.";
+    }
+}
 
 /* Add Registrar */
 if (isset($_POST['add_registrar'])) {
