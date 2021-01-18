@@ -4,26 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2245a7c5b1c2d48949e554972e660b63
+class ComposerStaticInita1d19bcf2032dd363495d62981dac563
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '9d8e013a5160a09477beb8e44f8ae97b' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/adjoint.php',
-        '6e78d1bdea6248d6aa117229efae50f2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/antidiagonal.php',
-        '4623d87924d94f5412fe5afbf1cef31d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/cofactors.php',
-        '901fd1f6950a637ca85f66b701a45e13' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/determinant.php',
-        '83057abc0e4acc99ba80154ee5d02a49' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/diagonal.php',
-        '07b7fd7a434451149b4fd477fca0ce06' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/identity.php',
-        'c8d43b340583e07ae89f2a3baef2cf89' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/inverse.php',
-        '499bb10ed7a3aee2ba4c09a31a85e8d1' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/minors.php',
-        '1cad2e6414d652e8b1c64e8967f6f37d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/trace.php',
-        '95a7f134ac17161d07def442b3b737e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/transpose.php',
-        'b3a6bc628377118d4b4b8ba08d1eb949' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/add.php',
-        '5fef6d0e407f3f8887266dfa4a6c534c' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/directsum.php',
-        '684ba247e1385946e3babdaa054119de' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/subtract.php',
-        'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
-        '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
-        '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -66,7 +50,22 @@ class ComposerStaticInit2245a7c5b1c2d48949e554972e660b63
         '883af48563631547925fa4c3b48ead07' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/multiply.php',
         'f190e3308e6ca23234a2875edc985c03' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideby.php',
         'ac9e33ce6841aa5bf5d16d465a2f03a7' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideinto.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '9d8e013a5160a09477beb8e44f8ae97b' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/adjoint.php',
+        '6e78d1bdea6248d6aa117229efae50f2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/antidiagonal.php',
+        '4623d87924d94f5412fe5afbf1cef31d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/cofactors.php',
+        '901fd1f6950a637ca85f66b701a45e13' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/determinant.php',
+        '83057abc0e4acc99ba80154ee5d02a49' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/diagonal.php',
+        '07b7fd7a434451149b4fd477fca0ce06' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/identity.php',
+        'c8d43b340583e07ae89f2a3baef2cf89' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/inverse.php',
+        '499bb10ed7a3aee2ba4c09a31a85e8d1' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/minors.php',
+        '1cad2e6414d652e8b1c64e8967f6f37d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/trace.php',
+        '95a7f134ac17161d07def442b3b737e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/transpose.php',
+        'b3a6bc628377118d4b4b8ba08d1eb949' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/add.php',
+        '5fef6d0e407f3f8887266dfa4a6c534c' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/directsum.php',
+        '684ba247e1385946e3babdaa054119de' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/subtract.php',
+        'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
+        '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
+        '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -93,6 +92,7 @@ class ComposerStaticInit2245a7c5b1c2d48949e554972e660b63
         'C' => 
         array (
             'Complex\\' => 8,
+            'Coderatio\\SimpleBackup\\' => 23,
         ),
     );
 
@@ -111,8 +111,8 @@ class ComposerStaticInit2245a7c5b1c2d48949e554972e660b63
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -134,29 +134,38 @@ class ComposerStaticInit2245a7c5b1c2d48949e554972e660b63
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'H' => 
+        'Coderatio\\SimpleBackup\\' => 
         array (
-            'HTMLPurifier' => 
-            array (
-                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
-            ),
+            0 => __DIR__ . '/..' . '/coderatio/simple-backup/src',
         ),
     );
 
     public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Coderatio\\SimpleBackup\\Exceptions\\NoTablesFoundException' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Exceptions/NoTablesFoundException.php',
+        'Coderatio\\SimpleBackup\\Foundation\\CompressBzip2' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\CompressGzip' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\CompressManagerFactory' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\CompressMethod' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\CompressNone' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\Configurator' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Configurator.php',
+        'Coderatio\\SimpleBackup\\Foundation\\Database' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Database.php',
+        'Coderatio\\SimpleBackup\\Foundation\\Mysqldump' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\Provider' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Provider.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapter' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapterDblib' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapterFactory' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapterMysql' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapterPgsql' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\Foundation\\TypeAdapterSqlite' => __DIR__ . '/..' . '/coderatio/simple-backup/src/Foundation/Mysqldump.php',
+        'Coderatio\\SimpleBackup\\SimpleBackup' => __DIR__ . '/..' . '/coderatio/simple-backup/src/SimpleBackup.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2245a7c5b1c2d48949e554972e660b63::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2245a7c5b1c2d48949e554972e660b63::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit2245a7c5b1c2d48949e554972e660b63::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit2245a7c5b1c2d48949e554972e660b63::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita1d19bcf2032dd363495d62981dac563::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita1d19bcf2032dd363495d62981dac563::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita1d19bcf2032dd363495d62981dac563::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -22,12 +22,23 @@
             "info": true,
             "autoWidth": false,
         });
-        
-        $('.select2').select2()
 
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
+
+
+
     });
+</script>
+<!-- File Uploads  -->
+<script src="../public/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script>
+    $(document).ready(function() {
+        bsCustomFileInput.init();
+    });
+</script>
+<script>
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
 </script>
