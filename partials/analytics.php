@@ -10,7 +10,13 @@
         3. Line Graph - Reported Deaths And Births Based On Months And Years
  */
 
-
+/* Registras */
+$query = "SELECT COUNT(*)  FROM `users` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($registras);
+$stmt->fetch();
+$stmt->close();
 
 /* 1. Total Registered Births */
 $query = "SELECT COUNT(*)  FROM `births_registration` ";
