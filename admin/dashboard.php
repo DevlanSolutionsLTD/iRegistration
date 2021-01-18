@@ -2,6 +2,7 @@
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
+require_once('../partials/analytics.php');
 check_login();
 require_once('../partials/head.php');
 ?>
@@ -24,42 +25,30 @@ require_once('../partials/head.php');
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-12 col-sm-6 col-md-4">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-baby"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Registered Births</span>
                                     <span class="info-box-number">
-                                        10
+                                        <?php echo $registered_births;?>
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-sm-6 col-md-4">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cross"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Registered Deaths</span>
                                     <span class="info-box-number">
-                                        10
+                                        <?php echo $registered_deaths;?>
                                     </span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Population Density</span>
-                                    <span class="info-box-number">
-                                        10
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                         <!-- Death And Births Rate Chart -->
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="card">

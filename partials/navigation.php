@@ -16,8 +16,8 @@
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
                 <?php
-                /* Only System Admins Can Touch This */
-                $_SESSION['auth_id'] = $auth_id;
+                /* Only System Admins Or Users Which Has A Can Touch This */
+                $auth_id = $_SESSION['auth_id'] ;
                 $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
                 $stmt = $mysqli->prepare($ret);
                 $stmt->execute(); //ok
