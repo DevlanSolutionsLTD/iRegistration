@@ -68,6 +68,17 @@ require_once('../partials/head.php');
                                 <canvas id="mortalityRate" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
                         </div>
+
+                        <!-- Montly Mortality Rates And Birth rates -->
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Monthly Mortalities And Births In <?php echo date('Y');?></h3>
+                                </div>
+<!--                                 <canvas id="monthlyMortalityAndBirthRates" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+ -->                                <div id="chartContainer" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

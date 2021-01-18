@@ -205,7 +205,7 @@ $stmt->close();
 $query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE month_reg= 'Mar' AND year_reg = '$currentYear'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
-$stmt->bind_result($may);
+$stmt->bind_result($mar);
 $stmt->fetch();
 $stmt->close();
 
