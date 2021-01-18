@@ -17,3 +17,11 @@ iRegistration is a prototype of a lightweight web based deaths and births regist
 4. Population Density Records
 5. And Many More 
 ```
+
+
+# Dummy Login Credentials
+```
+    System Admin:
+        Email: sysadmin@mail.com
+        Password: 123
+```

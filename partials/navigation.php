@@ -15,9 +15,21 @@
                 <li class="nav-item">
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="registras.php" class="nav-link">Registras</a>
-                </li>
+                <?php
+                /* Only System Admins Can Touch This */
+                $_SESSION['auth_id'] = $auth_id;
+                $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
+                $stmt = $mysqli->prepare($ret);
+                $stmt->execute(); //ok
+                $res = $stmt->get_result();
+                while ($AllowedUser = $res->fetch_object()) {
+                ?>
+                    <li class="nav-item">
+                        <a href="registras.php" class="nav-link">Registras</a>
+                    </li>
+                <?php
+                } ?>
+
                 <li class="nav-item">
                     <a href="births_registration.php" class="nav-link">Births Registration</a>
                 </li>
