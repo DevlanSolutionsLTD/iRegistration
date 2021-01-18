@@ -8,6 +8,8 @@
 <script src="../public/plugins/datatables/jquery.dataTables.js"></script>
 <script src="../public/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
+<!-- Select2 -->
+<script src="../public/plugins/select2/js/select2.full.min.js"></script>
 <!-- Initialize Em -->
 <script>
     $(function() {
@@ -20,5 +22,12 @@
             "info": true,
             "autoWidth": false,
         });
+        
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
     });
 </script>
