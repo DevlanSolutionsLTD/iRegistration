@@ -65,7 +65,7 @@ require_once('../partials/head.php');
                                 <div class="card-header">
                                     <h3 class="card-title">Monthly Births And Deaths Reported In <?php echo date('Y');?></h3>
                                 </div>
-                                <canvas id="MonthlyBirthrateVsDeathRate" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                <canvas id="mortalityRate" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
                         </div>
                     </div>
