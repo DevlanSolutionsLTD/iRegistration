@@ -68,7 +68,7 @@ if (isset($_POST['add_registrar'])) {
 }
 
 /* Update Registrar */
-if (isset($_POST['add_registrar'])) {
+if (isset($_POST['update_registrar'])) {
     //Error Handling and prevention of posting double entries
     $error = 0;
 
@@ -303,7 +303,99 @@ require_once('../partials/head.php');
                                             <td><?php echo $users->email; ?></td>
                                             <td><?php echo $users->phone; ?></td>
                                             <td><?php echo $users->addr; ?></td>
-                                            <td></td>
+                                            <td>
+                                                <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $users->id; ?>">
+                                                    <i class="fas fa-edit"></i>
+                                                    Update
+                                                </a>
+                                                <!-- Update Registrar Modal -->
+                                                <div class="modal fade" id="update-<?php echo $users->id; ?>">
+                                                    <div class="modal-dialog  modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Update <?php echo $users->name; ?> Profile</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Name</label>
+                                                                                <input type="text" required name="name" value="<?php echo $users->name;?>" class="form-control" id="exampleInputEmail1">
+                                                                                <input type="hidden" required name="id" value="<?php echo $users->id; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">ID / Passport Number</label>
+                                                                                <input type="text" required name="national_idno" value="<?php echo $users->national_idno;?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Email</label>
+                                                                                <input type="email" required name="email" value="<?php echo $users->email;?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Phone Number</label>
+                                                                                <input type="text" required name="phone" value="<?php echo $users->phone;?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Gender</label>
+                                                                                <select type="text" required name="sex" class="form-control basic">
+                                                                                    <option><?php echo $users->sex;?></option>
+                                                                                    <option>Male</option>
+                                                                                    <option>Female</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="exampleInputPassword1">Address</label>
+                                                                                <textarea required name="addr" rows="5" class="form-control"><?php echo $users->addr;?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_registrar" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Modal -->
+
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $users->id; ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                    Delete
+                                                </a>
+                                                <!-- Delete Confirmation Modal -->
+                                                <div class="modal fade" id="delete-<?php echo $users->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center text-danger">
+                                                                <h4>Delete <?php echo $users->name; ?> ?</h4>
+                                                                <br>
+                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                <a href="registras.php?delete=<?php echo $users->id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     <?php
                                     } ?>
