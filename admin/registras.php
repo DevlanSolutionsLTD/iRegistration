@@ -3,7 +3,74 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
+
+/* Import Registras Files From Excel Sheets */
+
+/* Add Registrar */
+if (isset($_POST['add_registrar'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['national_idno']) && !empty($_POST['national_idno'])) {
+        $national_idno = mysqli_real_escape_string($mysqli, trim($_POST['national_idno']));
+    } else {
+        $error = 1;
+        $err = "National ID / Passport Number Cannot Be Empty";
+    }
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Email Cannot Be Empty";
+    }
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
+    } else {
+        $error = 1;
+        $err = "Phone Number Cannot Be Empty";
+    }
+
+    if (!$error) {
+        //prevent Double entries
+        $sql = "SELECT * FROM  users WHERE  email='$email' || phone ='$phone' || national_idno = '$national_idno'  ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($email == $row['email']) {
+                $err =  "Account With This Email Already Exists";
+            } elseif ($national_idno == $row['national_idno']) {
+                $err = "National ID Number  / Passport Number Already Exists";
+            } else {
+                $err = "Account With That Phone Number Exists";
+            }
+        } else {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $national_idno  = $_POST['national_idno'];
+            $addr = $_POST['addr'];
+            $gender = $_POST['gender'];
+            $created_at = date('d M Y');
+
+            $query = "INSERT INTO users (id, name, email, phone, national_idno, addr, gender, created_at) VALUES(?,?,?,?,?,?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('ssssssss', $id, $name, $email, $phone, $national_idno, $addr, $gender, $created_at);
+            $stmt->execute();
+            if ($stmt) {
+                $success = "Added" && header("refresh:1; url=registras.php");
+            } else {
+                //inject alert that profile update task failed
+                $info = "Please Try Again Or Try Later";
+            }
+        }
+    }
+}
+/* Update Registrar */
+
+/* Delete Registra */
 require_once('../partials/head.php');
+
 ?>
 
 <body class="hold-transition layout-top-nav">
@@ -132,7 +199,7 @@ require_once('../partials/head.php');
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_lec" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_registrar" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
