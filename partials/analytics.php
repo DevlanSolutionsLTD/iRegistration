@@ -29,3 +29,53 @@ $stmt->fetch();
 $stmt->close();
 
 
+/* Overall Mortalities Based On Age Sets */
+
+/* 0 - 10 Years  */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age BETWEEN 0 AND 10 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetOne);
+$stmt->fetch();
+$stmt->close();
+
+/* 20 - 30 Years */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age BETWEEN 20 AND 30 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetTwo);
+$stmt->fetch();
+$stmt->close();
+
+/* 40 - 50 Years */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age BETWEEN 40 AND 50 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetThree);
+$stmt->fetch();
+$stmt->close();
+
+/* 60 - 70 Years */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age BETWEEN 60 AND 70 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetFour);
+$stmt->fetch();
+$stmt->close();
+
+/* 80 - 90 Years */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age BETWEEN 80 AND 90 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetFive);
+$stmt->fetch();
+$stmt->close();
+
+/* 90 And Above */
+$query = "SELECT COUNT(*)  FROM `deaths_registration` WHERE age >  90 ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($SetFive);
+$stmt->fetch();
+$stmt->close();
+

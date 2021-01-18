@@ -7,8 +7,9 @@
 <script>
     $(function() {
         /* 
-         * -------
+         * ---------------
          *  Births Aganist Deaths Rate Chart
+         * _______________
          */
 
         var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
@@ -33,4 +34,5 @@
         })
 
     })
+    
 </script>
