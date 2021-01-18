@@ -50,12 +50,12 @@ if (isset($_POST['add_registrar'])) {
             $phone = $_POST['phone'];
             $national_idno  = $_POST['national_idno'];
             $addr = $_POST['addr'];
-            $gender = $_POST['gender'];
+            $sex = $_POST['sex'];
             $created_at = date('d M Y');
 
-            $query = "INSERT INTO users (id, name, email, phone, national_idno, addr, gender, created_at) VALUES(?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO users (id, name, email, phone, national_idno, addr, sex, created_at) VALUES(?,?,?,?,?,?,?,?)";
             $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('ssssssss', $id, $name, $email, $phone, $national_idno, $addr, $gender, $created_at);
+            $rc = $stmt->bind_param('ssssssss', $id, $name, $email, $phone, $national_idno, $addr, $sex, $created_at);
             $stmt->execute();
             if ($stmt) {
                 $success = "Added" && header("refresh:1; url=registras.php");
@@ -66,9 +66,70 @@ if (isset($_POST['add_registrar'])) {
         }
     }
 }
-/* Update Registrar */
 
-/* Delete Registra */
+/* Update Registrar */
+if (isset($_POST['add_registrar'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['national_idno']) && !empty($_POST['national_idno'])) {
+        $national_idno = mysqli_real_escape_string($mysqli, trim($_POST['national_idno']));
+    } else {
+        $error = 1;
+        $err = "National ID / Passport Number Cannot Be Empty";
+    }
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Email Cannot Be Empty";
+    }
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
+    } else {
+        $error = 1;
+        $err = "Phone Number Cannot Be Empty";
+    }
+
+    if (!$error) {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $national_idno  = $_POST['national_idno'];
+        $addr = $_POST['addr'];
+        $sex = $_POST['sex'];
+        $updated_at = date('d M Y');
+
+        $query = "UPDATE  users SET name =?, email =?, phone =?, national_idno =?, addr =?, sex =?, updated_at = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('ssssssss', $name, $email, $phone, $national_idno, $addr, $sex, $updated_at, $id);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Updated" && header("refresh:1; url=registras.php");
+        } else {
+            //inject alert that profile update task failed
+            $info = "Please Try Again Or Try Later";
+        }
+    }
+}
+
+/* Delete Registrar */
+
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $adn = "DELETE FROM users WHERE id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Deleted" && header("refresh:1; url=registras.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
+
 require_once('../partials/head.php');
 
 ?>
