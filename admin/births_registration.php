@@ -207,12 +207,12 @@ require_once('../partials/head.php');
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-left text-dark">Registrars</h1>
+                            <h1 class="m-0 text-left text-dark">Births Registration Records</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Manage Registras</li>
+                                <li class="breadcrumb-item active">Births Registrations</li>
                             </ol>
                         </div>
                     </div>
@@ -222,16 +222,16 @@ require_once('../partials/head.php');
             <div class="content">
                 <div class="container">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import-modal">Import Registras </button>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-modal">Add Registrar</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import-modal">Import Birth Records </button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-modal">Add Birth Record</button>
                     </div>
-                    <!-- Import Registras Modal -->
+                    <!-- Import Births Registration Modal -->
                     <div class="modal fade" id="import-modal">
                         <div class="modal-dialog  modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">
-                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/registras.xls">Download</a> The Sample File.
+                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/births_registration.xls">Download</a> The Sample File.
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -264,9 +264,9 @@ require_once('../partials/head.php');
                             </div>
                         </div>
                     </div>
-                    <!-- End Import Registras Modal -->
+                    <!-- End Import Birth Registration Modal -->
 
-                    <!-- Add Registras Modal -->
+                    <!-- Add Birth Registration  Modal -->
                     <div class="modal fade" id="add-modal">
                         <div class="modal-dialog  modal-lg">
                             <div class="modal-content">
@@ -281,28 +281,22 @@ require_once('../partials/head.php');
                                     <form method="post" enctype="multipart/form-data" role="form">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Name</label>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Registration Number</label>
+                                                    <input type="text" required name="reg_number" value="<?php echo $alpha;?>-<?php echo $beta;?>" class="form-control" id="exampleInputEmail1">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Child Full Name</label>
                                                     <input type="text" required name="name" class="form-control" id="exampleInputEmail1">
                                                     <input type="hidden" required name="id" value="<?php echo $ID; ?>" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">ID / Passport Number</label>
-                                                    <input type="text" required name="national_idno" class="form-control">
-                                                </div>
-                                            </div>
 
-                                            <div class="row">
                                                 <div class="form-group col-md-4">
-                                                    <label for="">Email</label>
-                                                    <input type="email" required name="email" class="form-control">
+                                                    <label for="">Child Date Of Birth</label>
+                                                    <input type="text" required name="dob" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="">Phone Number</label>
-                                                    <input type="text" required name="phone" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Gender</label>
+                                                    <label for="">Child Gender</label>
                                                     <select type="text" required name="sex" class="form-control basic">
                                                         <option>Male</option>
                                                         <option>Female</option>
@@ -311,9 +305,20 @@ require_once('../partials/head.php');
                                             </div>
 
                                             <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Fathers Full Name </label>
+                                                    <input type="text" required name="fathers_name" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Mother's Full Name</label>
+                                                    <input type="text" required name="mothers_name" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="exampleInputPassword1">Address</label>
-                                                    <textarea required name="addr" rows="5" class="form-control"></textarea>
+                                                    <label for="exampleInputPassword1">Place Of Birth</label>
+                                                    <textarea required name="place_of_birth" rows="3" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
