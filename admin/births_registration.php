@@ -202,6 +202,25 @@ if (isset($_POST['add_birth'])) {
 /* Update Birth */
 if (isset($_POST['update_birth'])) {
     /* Handle Birth Records Update Logic */
+           
+           $reg_number = $_POST['reg_number'];
+           $name = $_POST['name'];
+            $dob  = $_POST['dob'];
+            $sex = $_POST['sex'];
+            $fathers_name = $_POST['fathers_name'];
+            $mothers_name = $_POST['mothers_name'];
+            $place_of_birth = $_POST['place_of_birth'];
+            $query = "UPDATE births_registration  SET  name =? ,dob =? ,sex =? ,fathers_name =? ,mothers_name =?,place_of_birth =? WHERE reg_number =?";
+            $stmt = $conn->prepare($query);
+            $rc = $stmt->bind_param('sssssss',  $name,$dob,$sex,$fathers_name,$mothers_name,$place_of_birth,$reg_number);
+            $stmt->execute();
+            if ($stmt) {
+              //inject alert that post is shared  
+              $success = "Records Updated" && header("refresh:1; url=births_registration.php");
+            } else {
+              //inject alert that task failed
+              $info = "Please Try Again Or Try Later";
+            }
 
 }
 
@@ -215,7 +234,7 @@ if (isset($_GET['delete_birth'])) {
   $stmt->close();
   if ($stmt) {
     //inject alert that post is shared
-    $success = "Removed permantly" && header("refresh:1; url=birth_registration.php");
+    $success = "Removed permantly" && header("refresh:1; url=births_registration.php");
   } else {
     //inject alert that task failed
     $info = "Please Try Again Or Try Later";
@@ -430,7 +449,59 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
+                                              <!-- Form -->
+                                      <form method="post" enctype="multipart/form-data" role="form">
+                                        <div class="card-body">
+                                            <div class="row">
+                                               
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Registrar Name</label>
+                                                    <input type="text"  readonly required name="name" placeholder="<?php echo $births->registrar_name ?>" class="form-control" id="exampleInputEmail1">
+                                                    <input type="hidden" required name="reg_number" value="<?php echo $births->reg_number; ?>" class="form-control">
+                                                </div>
+                                                
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Child Full Name</label>
+                                                    <input type="text" required name="name" placeholder ="<?php echo $births->name; ?>" class="form-control" id="exampleInputEmail1">
+                                                    
+                                                </div>
 
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Child Date Of Birth</label>
+                                                    <input type="text" required name="dob" placeholder ="<?php echo $births->dob; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Child Gender</label>
+                                                    <select type="text" required name="sex" class="form-control basic">
+                                                    <option selected><?php echo $births->sex; ?></option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Fathers Full Name </label>
+                                                    <input type="text" required name="fathers_name" placeholder ="<?php echo $births->fathers_name; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Mother's Full Name</label>
+                                                    <input type="text" required name="mothers_name" placeholder ="<?php echo $births->mothers_name; ?>" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="exampleInputPassword1">Place Of Birth</label>
+                                                    <textarea required name="place_of_birth" rows="3" class="form-control" placeholder ="<?php echo $births->place_of_birth; ?>"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" name="update_birth" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
