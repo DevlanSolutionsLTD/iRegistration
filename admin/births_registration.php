@@ -87,7 +87,7 @@ if (isset($_POST["upload"])) {
             $created_at = date('d M Y');
 
             //Get A System Generated Birth Registration Number
-            $reg_number = $alpha - $beta;
+            $reg_number = $a;
 
             if (!empty($name) || !empty($dob) || !empty($place_of_birth) || !empty($dob) || !empty($sex)) {
                 $query = "INSERT INTO births_registration (id, reg_number, name, dob, sex, fathers_name, mothers_name, place_of_birth, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -232,7 +232,7 @@ require_once('../partials/head.php');
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">
-                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/births_registration.xls">Download</a> The Sample File.
+                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/births_registration.xlsx">Download</a> The Sample File.
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -284,7 +284,7 @@ require_once('../partials/head.php');
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="">Registration Number</label>
-                                                    <input type="text" required name="reg_number" value="<?php echo $alpha; ?>-<?php echo $beta; ?>" class="form-control" id="exampleInputEmail1">
+                                                    <input type="text" required name="reg_number" value="<?php echo $a; ?>-<?php echo $b; ?>" class="form-control" id="exampleInputEmail1">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Registrar Name</label>
@@ -305,7 +305,10 @@ require_once('../partials/head.php');
                                                 <div class="form-group col-md-4">
                                                     <label for="">Child Full Name</label>
                                                     <input type="text" required name="name" class="form-control" id="exampleInputEmail1">
+                                                    <!-- Hide This -->
                                                     <input type="hidden" required name="id" value="<?php echo $ID; ?>" class="form-control">
+                                                    <input type="hidden" required name="month_reg" value="<?php echo date('M'); ?>" class="form-control">
+                                                    <input type="hidden" required name="year_reg" value="<?php echo date('Y'); ?>" class="form-control">
                                                 </div>
 
                                                 <div class="form-group col-md-4">
@@ -426,7 +429,7 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
-                                                                <h4>Delete <?php echo $births->name; ?> - <?php echo $births->reg_number; ?> ?</h4>
+                                                                <h4>Delete <?php echo $births->name; ?> - <?php echo $births->reg_number; ?> Birth Record ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                 <a href="births_registration.php?delete=<?php echo $births->id; ?>" class="text-center btn btn-danger"> Delete </a>
