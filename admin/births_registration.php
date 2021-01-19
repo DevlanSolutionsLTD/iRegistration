@@ -202,10 +202,24 @@ if (isset($_POST['add_birth'])) {
 /* Update Birth */
 if (isset($_POST['update_birth'])) {
     /* Handle Birth Records Update Logic */
+
 }
 
 if (isset($_GET['delete_birth'])) {
     /* Handle Birth Records Deletion Here */
+  $id = $_GET['delete_birth'];
+  $adn = "DELETE FROM births_registration WHERE id=?";
+  $stmt = $conn->prepare($adn);
+  $stmt->bind_param('s', $id);
+  $stmt->execute();
+  $stmt->close();
+  if ($stmt) {
+    //inject alert that post is shared
+    $success = "Removed permantly" && header("refresh:1; url=birth_registration.php");
+  } else {
+    //inject alert that task failed
+    $info = "Please Try Again Or Try Later";
+  }
 }
 
 require_once('../partials/head.php');
@@ -426,12 +440,12 @@ require_once('../partials/head.php');
                                                 </div>
                                                 <!-- End Modal -->
 
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $births->id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete_birth-<?php echo $births->id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Delete Confirmation Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $births->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete_birth-<?php echo $births->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -444,7 +458,7 @@ require_once('../partials/head.php');
                                                                 <h4>Delete <?php echo $births->name; ?> - <?php echo $births->reg_number; ?> Birth Record ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="births_registration.php?delete=<?php echo $births->id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="births_registration.php?delete_birth=<?php echo $births->id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
