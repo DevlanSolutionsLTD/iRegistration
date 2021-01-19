@@ -44,57 +44,69 @@ if (isset($_POST["upload"])) {
                 $id = mysqli_real_escape_string($conn, $spreadSheetAry[$i][0]);
             }
 
-            $name = "";
+            $reg_number = "";
             if (isset($spreadSheetAry[$i][1])) {
-                $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][1]);
+                $reg_number = mysqli_real_escape_string($conn, $spreadSheetAry[$i][1]);
+            }
+
+            $registrar_name = "";
+            if (isset($spreadSheetAry[$i][2])) {
+                $registrar_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
+            }
+
+            $name = "";
+            if (isset($spreadSheetAry[$i][3])) {
+                $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][3]);
             }
 
             $dob = "";
-            if (isset($spreadSheetAry[$i][2])) {
-                $dob = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
+            if (isset($spreadSheetAry[$i][4])) {
+                $dob = mysqli_real_escape_string($conn, $spreadSheetAry[$i][4]);
             }
 
             $sex = "";
-            if (isset($spreadSheetAry[$i][3])) {
-                $sex = mysqli_real_escape_string($conn, $spreadSheetAry[$i][3]);
+            if (isset($spreadSheetAry[$i][5])) {
+                $sex = mysqli_real_escape_string($conn, $spreadSheetAry[$i][5]);
             }
 
             $fathers_name = "";
-            if (isset($spreadSheetAry[$i][4])) {
-                $fathers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][4]);
+            if (isset($spreadSheetAry[$i][6])) {
+                $fathers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][6]);
             }
 
             $mothers_name = "";
-            if (isset($spreadSheetAry[$i][5])) {
-                $mothers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][5]);
+            if (isset($spreadSheetAry[$i][7])) {
+                $mothers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][7]);
             }
 
             $place_of_birth = "";
-            if (isset($spreadSheetAry[$i][6])) {
-                $place_of_birth = mysqli_real_escape_string($conn, $spreadSheetAry[$i][6]);
+            if (isset($spreadSheetAry[$i][8])) {
+                $place_of_birth = mysqli_real_escape_string($conn, $spreadSheetAry[$i][8]);
             }
 
             $month_reg = "";
-            if (isset($spreadSheetAry[$i][7])) {
-                $month_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][7]);
+            if (isset($spreadSheetAry[$i][9])) {
+                $month_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][9]);
             }
 
             $year_reg = "";
-            if (isset($spreadSheetAry[$i][8])) {
-                $year_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][8]);
+            if (isset($spreadSheetAry[$i][10])) {
+                $year_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][10]);
             }
 
-            $created_at = date('d M Y');
-
-            //Get A System Generated Birth Registration Number
-            $reg_number = $a;
+            $created_at = "";
+            if (isset($spreadSheetAry[$i][11])) {
+                $created_at = mysqli_real_escape_string($conn, $spreadSheetAry[$i][11]);
+            }
+            
 
             if (!empty($name) || !empty($dob) || !empty($place_of_birth) || !empty($dob) || !empty($sex)) {
-                $query = "INSERT INTO births_registration (id, reg_number, name, dob, sex, fathers_name, mothers_name, place_of_birth, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                $paramType = "sssssssssss";
+                $query = "INSERT INTO births_registration (id, reg_number, registrar_name, name, dob, sex, fathers_name, mothers_name, place_of_birth, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                $paramType = "ssssssssssss";
                 $paramArray = array(
                     $id,
                     $reg_number,
+                    $registrar_name,
                     $name,
                     $dob,
                     $sex,
