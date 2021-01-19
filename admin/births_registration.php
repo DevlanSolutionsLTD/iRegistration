@@ -4,8 +4,7 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 
-/* Import Registras Files From Excel Sheets */
-
+/* Import Birth Registration Files From Excel Sheets */
 use DevLanDataAPI\DataSource;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
@@ -49,53 +48,67 @@ if (isset($_POST["upload"])) {
                 $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][1]);
             }
 
-            $national_idno = "";
+            $dob = "";
             if (isset($spreadSheetAry[$i][2])) {
-                $national_idno = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
-            }
-
-            $phone = "";
-            if (isset($spreadSheetAry[$i][3])) {
-                $phone = mysqli_real_escape_string($conn, $spreadSheetAry[$i][3]);
-            }
-
-            $email = "";
-            if (isset($spreadSheetAry[$i][4])) {
-                $email = mysqli_real_escape_string($conn, $spreadSheetAry[$i][4]);
-            }
-
-            $addr = "";
-            if (isset($spreadSheetAry[$i][5])) {
-                $addr = mysqli_real_escape_string($conn, $spreadSheetAry[$i][5]);
+                $dob = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
             }
 
             $sex = "";
-            if (isset($spreadSheetAry[$i][6])) {
-                $sex = mysqli_real_escape_string($conn, $spreadSheetAry[$i][6]);
+            if (isset($spreadSheetAry[$i][3])) {
+                $sex = mysqli_real_escape_string($conn, $spreadSheetAry[$i][3]);
             }
 
-            $created_at = date('d M Y');
+            $fathers_name = "";
+            if (isset($spreadSheetAry[$i][4])) {
+                $fathers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][4]);
+            }
+
+            $mothers_name = "";
+            if (isset($spreadSheetAry[$i][5])) {
+                $mothers_name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][5]);
+            }
+
+            $place_of_birth = "";
+            if (isset($spreadSheetAry[$i][6])) {
+                $place_of_birth = mysqli_real_escape_string($conn, $spreadSheetAry[$i][6]);
+            }
+
+            $month_reg = "";
+            if (isset($spreadSheetAry[$i][7])) {
+                $month_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][7]);
+            }
+
+            $year_reg = "";
+            if (isset($spreadSheetAry[$i][8])) {
+                $year_reg = mysqli_real_escape_string($conn, $spreadSheetAry[$i][8]);
+            }
             
+            $created_at = date('d M Y');
 
-
-            if (!empty($name) || !empty($national_idno) || !empty($email) || !empty($phone) || !empty($sex)) {
-                $query = "INSERT INTO users (id, name, national_idno, phone, email, addr, sex, created_at) VALUES(?,?,?,?,?,?,?,?)";
-                $paramType = "ssssssss";
+            //Get A System Generated Birth Registration Number
+            $reg_number = $alpha-$beta;
+            
+            if (!empty($name) || !empty($dob) || !empty($place_of_birth) || !empty($dob) || !empty($sex)) {
+                $query = "INSERT INTO births_registration (id, reg_number, name, dob, sex, fathers_name, mothers_name, place_of_birth, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                $paramType = "sssssssssss";
                 $paramArray = array(
                     $id,
+                    $reg_number,
                     $name,
-                    $national_idno,
-                    $phone,
-                    $email,
-                    $addr,
+                    $dob,
                     $sex,
+                    $fathers_name,
+                    $mothers_name,
+                    $place_of_birth,
+                    $month_reg,
+                    $year_reg,
                     $created_at
                 );
                 $insertId = $db->insert($query, $paramType, $paramArray);
                 if (!empty($insertId)) {
                     $err = "Error Occured While Importing Data";
                 } else {
-                    $success = "Data Imported" && header("refresh:1; url=registras.php");
+                    $success = "Data Imported" && header("refresh:1; url=births_registration.php");
                 }
             }
         }
@@ -104,59 +117,67 @@ if (isset($_POST["upload"])) {
     }
 }
 
-/* Add Registrar */
-if (isset($_POST['add_registrar'])) {
+/* Add Birth Registration  */
+if (isset($_POST['add_birth'])) {
     //Error Handling and prevention of posting double entries
     $error = 0;
 
-    if (isset($_POST['national_idno']) && !empty($_POST['national_idno'])) {
-        $national_idno = mysqli_real_escape_string($mysqli, trim($_POST['national_idno']));
+    if (isset($_POST['name']) && !empty($_POST['name'])) {
+        $name = mysqli_real_escape_string($mysqli, trim($_POST['name']));
     } else {
         $error = 1;
-        $err = "National ID / Passport Number Cannot Be Empty";
+        $err = "Child Name Cannot Be Empty";
     }
-    if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    if (isset($_POST['dob']) && !empty($_POST['dob'])) {
+        $dob = mysqli_real_escape_string($mysqli, trim($_POST['dob']));
     } else {
         $error = 1;
-        $err = "Email Cannot Be Empty";
+        $err = "Date Of Birth Cannot Be Empty";
     }
-    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
-        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
+    if (isset($_POST['sex']) && !empty($_POST['sex'])) {
+        $sex = mysqli_real_escape_string($mysqli, trim($_POST['sex']));
     } else {
         $error = 1;
-        $err = "Phone Number Cannot Be Empty";
+        $err = "Gender Cannot Be Empty";
     }
-
+    
+    /* System Generated Registration Number -> To Edit This File Check Codegen.php File Under Configs*/
+    if (isset($_POST['reg_number']) && !empty($_POST['reg_number'])) {
+        $reg_number = mysqli_real_escape_string($mysqli, trim($_POST['reg_number']));
+    } else {
+        $error = 1;
+        $err = "Registration Number Cannot Be Empty";
+    }
+    
     if (!$error) {
         //prevent Double entries
-        $sql = "SELECT * FROM  users WHERE  email='$email' || phone ='$phone' || national_idno = '$national_idno'  ";
+        $sql = "SELECT * FROM  births_registration WHERE  reg_number='$reg_number'  ";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
-            if ($email == $row['email']) {
-                $err =  "Account With This Email Already Exists";
-            } elseif ($national_idno == $row['national_idno']) {
-                $err = "National ID Number  / Passport Number Already Exists";
-            } else {
-                $err = "Account With That Phone Number Exists";
+            if ($reg_number == $row['reg_number']) {
+                $err =  "A Birth With That Registration Number Exists";
             }
         } else {
             $id = $_POST['id'];
+            $reg_number = $_POST['reg_number'];
+            $registrar_name = $_POST['registrar_name'];
             $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $national_idno  = $_POST['national_idno'];
-            $addr = $_POST['addr'];
+            $dob  = $_POST['dob'];
             $sex = $_POST['sex'];
+            $fathers_name = $_POST['fathers_name'];
+            $mothers_name = $_POST['mothers_name'];
+            $place_of_birth = $_POST['place_of_birth'];
+            $month_reg = $_POST['month_reg'];
+            $year_reg = $_POST['year_reg'];
             $created_at = date('d M Y');
 
-            $query = "INSERT INTO users (id, name, email, phone, national_idno, addr, sex, created_at) VALUES(?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO births_registration (id, reg_number, registrar_name, name, dob, sex, fathers_name, mothers_name, place_of_birth, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('ssssssss', $id, $name, $email, $phone, $national_idno, $addr, $sex, $created_at);
+            $rc = $stmt->bind_param('ssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $sex, $fathers_name, $mothers_name, $place_of_birth, $month_reg, $year_reg, $created_at);
             $stmt->execute();
             if ($stmt) {
-                $success = "Added" && header("refresh:1; url=registras.php");
+                $success = "Added" && header("refresh:1; url=births_registration.php");
             } else {
                 //inject alert that profile update task failed
                 $info = "Please Try Again Or Try Later";
@@ -165,67 +186,13 @@ if (isset($_POST['add_registrar'])) {
     }
 }
 
-/* Update Registrar */
-if (isset($_POST['update_registrar'])) {
-    //Error Handling and prevention of posting double entries
-    $error = 0;
-
-    if (isset($_POST['national_idno']) && !empty($_POST['national_idno'])) {
-        $national_idno = mysqli_real_escape_string($mysqli, trim($_POST['national_idno']));
-    } else {
-        $error = 1;
-        $err = "National ID / Passport Number Cannot Be Empty";
-    }
-    if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-    } else {
-        $error = 1;
-        $err = "Email Cannot Be Empty";
-    }
-    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
-        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
-    } else {
-        $error = 1;
-        $err = "Phone Number Cannot Be Empty";
-    }
-
-    if (!$error) {
-        $id = $_POST['id'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $national_idno  = $_POST['national_idno'];
-        $addr = $_POST['addr'];
-        $sex = $_POST['sex'];
-        $updated_at = date('d M Y');
-
-        $query = "UPDATE  users SET name =?, email =?, phone =?, national_idno =?, addr =?, sex =?, updated_at = ? WHERE id = ?";
-        $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('ssssssss', $name, $email, $phone, $national_idno, $addr, $sex, $updated_at, $id);
-        $stmt->execute();
-        if ($stmt) {
-            $success = "Updated" && header("refresh:1; url=registras.php");
-        } else {
-            //inject alert that profile update task failed
-            $info = "Please Try Again Or Try Later";
-        }
-    }
+/* Update Birth */
+if (isset($_POST['update_birth'])) {
+   /* Handle Birth Records Update Logic */
 }
 
-/* Delete Registrar */
-
-if (isset($_GET['delete'])) {
-    $delete = $_GET['delete'];
-    $adn = "DELETE FROM users WHERE id=?";
-    $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('s', $delete);
-    $stmt->execute();
-    $stmt->close();
-    if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=registras.php");
-    } else {
-        $info = "Please Try Again Or Try Later";
-    }
+if (isset($_GET['delete_birth'])) {
+    /* Handle Birth Records Deletion Here */
 }
 
 require_once('../partials/head.php');
