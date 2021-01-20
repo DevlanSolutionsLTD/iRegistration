@@ -400,33 +400,34 @@ require_once('../partials/head.php');
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
                                     $cnt = 1;
-                                    while ($births = $res->fetch_object()) {
+                                    while ($deaths = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $births->reg_number; ?></td>
-                                            <td><?php echo $births->name; ?></td>
-                                            <td><?php echo $births->dob; ?></td>
-                                            <td><?php echo $births->sex; ?></td>
-                                            <td><?php echo $births->fathers_name; ?></td>
-                                            <td><?php echo $births->mothers_name; ?></td>
-                                            <td><?php echo $births->place_of_birth; ?></td>
+                                            <td><?php echo $deaths->reg_number; ?></td>
+                                            <td><?php echo $deaths->name; ?></td>
+                                            <td><?php echo $deaths->dob; ?></td>
+                                            <td><?php echo $deaths->age; ?></td>
+                                            <td><?php echo $deaths->sex; ?></td>
+                                            <td><?php echo $deaths->occupation; ?></td>
+                                            <td><?php echo $deaths->tribe; ?></td>
+                                            <td><?php echo $deaths->place_of_birth; ?></td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $births->id; ?>">
+                                                <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $deaths->id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
                                                 <!-- Update Births Modal -->
-                                                <div class="modal fade" id="update-<?php echo $births->id; ?>">
+                                                <div class="modal fade" id="update-<?php echo $deaths->id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Update <?php echo $births->reg_number; ?> Record</h4>
+                                                                <h4 class="modal-title">Update <?php echo $deaths->reg_number; ?> Record</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                
+
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -441,7 +442,7 @@ require_once('../partials/head.php');
                                                     Delete
                                                 </a>
                                                 <!-- Delete Confirmation Modal -->
-                                                <div class="modal fade" id="delete_birth-<?php echo $births->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete_birth-<?php echo $deaths->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -451,10 +452,10 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
-                                                                <h4>Delete <?php echo $births->name; ?> - <?php echo $births->reg_number; ?> Birth Record ?</h4>
+                                                                <h4>Delete <?php echo $deaths->name; ?> - <?php echo $deaths->reg_number; ?> Death Record ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="births_registration.php?delete_birth=<?php echo $births->id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="deaths_registration.php?delete_deaths=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
