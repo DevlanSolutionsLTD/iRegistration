@@ -250,7 +250,7 @@ require_once('../partials/head.php');
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">
-                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/death_registration.xlsx">Download</a> The Sample File.
+                                        Allowed file types: XLS, XLSX. Please, <a href="public/templates/sample_deaths_file.xlsx">Download</a> The Sample File.
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
