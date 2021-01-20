@@ -206,9 +206,29 @@ if (isset($_POST['report_death'])) {
     }
 }
 
-if (isset($_POST['update_death_record'])) {
+if (isset($_POST['update_death'])) {
     /* Handle Death Records Update Logic */
+    $reg_number = $_POST['reg_number'];
+    $name = $_POST['name'];
+    $dob  = $_POST['dob'];
+    $sex = $_POST['sex'];
+    $age = $_POST['age'];
+    $occupation = $_POST['occupation'];
+    $place_of_death = $_POST['place_of_death'];
+    $tribe = $_POST['tribe'];
+    $query = "UPDATE deaths_registration  SET  name =? ,dob =? ,sex =? ,age =? ,occupation =?,place_of_death =?,tribe =? WHERE reg_number =?";
+    $stmt = $conn->prepare($query);
+    $rc = $stmt->bind_param('ssssssss',  $name, $dob, $sex, $age, $occupation, $place_of_death,$tribe, $reg_number);
+    $stmt->execute();
+    if ($stmt) {
+        $success = "Records Updated" && header("refresh:1; url=deaths_registration.php");
+    } else {
+        //inject alert that task failed
+        $info = "Please Try Again Or Try Later";
+    }
 }
+
+
 
 if (isset($_GET['delete_death_record'])) {
     /* Handle Death Records Deletion Here */
@@ -219,7 +239,7 @@ if (isset($_GET['delete_death_record'])) {
         $stmt->execute();
         $stmt->close();
         if ($stmt) {
-            $success = "Removed permantly" && header("refresh:1; url=births_registration.php");
+            $success = "Removed permantly" && header("refresh:1; url=deaths_registration.php");
         } else {
             //inject alert that task failed
             $info = "Please Try Again Or Try Later";
@@ -425,12 +445,12 @@ require_once('../partials/head.php');
                                             <td><?php echo $deaths->tribe; ?></td>
                                             <td><?php echo $deaths->place_of_death; ?></td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $deaths->id; ?>">
+                                            <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $deaths->id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
                                                 <!-- Update Births Modal -->
-                                                <div class="modal fade" id="delete_death_record-<?php echo $deaths->id; ?>">
+                                                <div class="modal fade" id="update-<?php echo $deaths->id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -440,7 +460,60 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <!-- Form -->
+                                                                 <!-- Form -->
+                                    <form method="post" enctype="multipart/form-data" role="form">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    
+                                                    <input type="text" hidden required name="reg_number" value="<?php echo $deaths->reg_number; ?>" class="form-control" id="exampleInputEmail1">
+                                                </div>
+                                               
+                                                <div class="form-group col-md-12">
+                                                    <label for="">Deceased Full Name</label>
+                                                    <input type="text" required name="name" value="<?php echo $deaths->name; ?>" class="form-control" id="exampleInputEmail1">
+                                                </div>
 
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Deceased Date Of Birth</label>
+                                                    <input type="text" required name="dob" value="<?php echo $deaths->dob; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Deceased Age</label>
+                                                    <input type="text" required name="age" value="<?php echo $deaths->age; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Deceased Gender</label>
+                                                    <select type="text" required name="sex" class="form-control basic">
+                                                        <option selected><?php echo $deaths->sex; ?></option>
+                                                        <option value="male">Male</option>
+                                                        <option value="male">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Deceased Occupation </label>
+                                                    <input type="text" required name="occupation" value="<?php echo $deaths->occupation; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Deceased Tribe</label>
+                                                    <input type="text" required name="tribe" value="<?php echo $deaths->tribe; ?>" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="exampleInputPassword1">Place Of Death</label>
+                                                    <textarea required name="place_of_death" value="<?php echo $deaths->place_of_death; ?>"rows="3" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" name="update_death" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -449,6 +522,7 @@ require_once('../partials/head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Modal -->
+
 
                                                 <a class="badge badge-danger" data-toggle="modal" href="#delete_birth-<?php echo $deaths->id; ?>">
                                                     <i class="fas fa-trash"></i>
@@ -468,7 +542,7 @@ require_once('../partials/head.php');
                                                                 <h4>Delete <?php echo $deaths->name; ?> - <?php echo $deaths->reg_number; ?> Death Record ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="deaths_registration.php?delete_death_record=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="deaths_registration.php?delete_deaths=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
