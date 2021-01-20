@@ -107,7 +107,7 @@ if (isset($_POST["upload"])) {
 
             if (!empty($name) || !empty($dob) || !empty($place_of_death) || !empty($age) || !empty($sex)) {
                 $query = "INSERT INTO deaths_registration (id, reg_number, registrar_name, name, dob, age, sex, occupation, place_of_death, tribe, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                $paramType = "ssssssssssss";
+                $paramType = "sssssssssssss";
                 $paramArray = array(
                     $id,
                     $reg_number,
