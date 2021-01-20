@@ -194,7 +194,7 @@ if (isset($_POST['report_death'])) {
 
             $query = "INSERT INTO deaths_registration (id, reg_number, registrar_name, name, dob, age, sex, occupation, place_of_death, tribe, month_reg, year_reg, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('ssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $age, $sex, $occupation, $place_of_death, $tribe, $month_reg, $year_reg, $created_at);
+            $rc = $stmt->bind_param('sssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $age, $sex, $occupation, $place_of_death, $tribe, $month_reg, $year_reg, $created_at);
             $stmt->execute();
             if ($stmt) {
                 $success = "Added" && header("refresh:1; url=deaths_registration.php");
@@ -359,12 +359,12 @@ require_once('../partials/head.php');
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label for="exampleInputPassword1">Place Of Death</label>
-                                                    <textarea required name="place_of_birth" rows="3" class="form-control"></textarea>
+                                                    <textarea required name="place_of_death" rows="3" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_birth" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="report_death" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -410,7 +410,7 @@ require_once('../partials/head.php');
                                             <td><?php echo $deaths->sex; ?></td>
                                             <td><?php echo $deaths->occupation; ?></td>
                                             <td><?php echo $deaths->tribe; ?></td>
-                                            <td><?php echo $deaths->place_of_birth; ?></td>
+                                            <td><?php echo $deaths->place_of_death; ?></td>
                                             <td>
                                                 <a class="badge badge-primary" data-toggle="modal" href="#update-<?php echo $deaths->id; ?>">
                                                     <i class="fas fa-edit"></i>
@@ -437,7 +437,7 @@ require_once('../partials/head.php');
                                                 </div>
                                                 <!-- End Modal -->
 
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete_birth-<?php echo $births->id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete_birth-<?php echo $deaths->id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
