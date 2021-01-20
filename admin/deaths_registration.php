@@ -212,7 +212,20 @@ if (isset($_POST['update_death_record'])) {
 
 if (isset($_GET['delete_death_record'])) {
     /* Handle Death Records Deletion Here */
-}
+       $id = $_GET['delete_death_record'];
+        $adn = "DELETE FROM deaths_registration WHERE id=?";
+        $stmt = $conn->prepare($adn);
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+        $stmt->close();
+        if ($stmt) {
+            $success = "Removed permantly" && header("refresh:1; url=births_registration.php");
+        } else {
+            //inject alert that task failed
+            $info = "Please Try Again Or Try Later";
+        }
+    }
+
 
 require_once('../partials/head.php');
 
@@ -417,7 +430,7 @@ require_once('../partials/head.php');
                                                     Update
                                                 </a>
                                                 <!-- Update Births Modal -->
-                                                <div class="modal fade" id="update-<?php echo $deaths->id; ?>">
+                                                <div class="modal fade" id="delete_death_record-<?php echo $deaths->id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -455,7 +468,7 @@ require_once('../partials/head.php');
                                                                 <h4>Delete <?php echo $deaths->name; ?> - <?php echo $deaths->reg_number; ?> Death Record ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="deaths_registration.php?delete_deaths=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="deaths_registration.php?delete_death_record=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
