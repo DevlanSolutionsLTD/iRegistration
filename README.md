@@ -26,7 +26,7 @@ iRegistration is a prototype of a lightweight web based deaths and births regist
         Password: 123
 ```
 
-# Tasks Assigns On Wed Jan 19
+# Tasks Assigns 
 ```
-2. Death Registrations  CR ->Mart  UD -> Antony
+To view your assigned tasks, kindly log in here : http://pm.wcf.co.ke/
 ```
