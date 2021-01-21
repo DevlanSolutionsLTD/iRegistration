@@ -79,15 +79,69 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="text-center">
-                                                                    <img class="img-fluid" height="150" width="150" src="../public/dist/img/Coat_Of_Arms.png">
-                                                                </div>
-                                                                <div class="row text-center">
-                                                                    <div class="col-sm-12">
-                                                                        <h3 class="text-bold">REPUBLIC OF KENYA</h3>
-                                                                        <h4 class="text-bold">CERTIFICATE OF BIRTH</h4>
-                                                                        <h6 class="text-bold">Entry No: <?php echo $births->reg_number; ?> </h6>
+                                                                <div id="Print_cert">
+                                                                    <div class="text-center">
+                                                                        <img class="img-fluid" height="150" width="150" src="../public/dist/img/Coat_Of_Arms.png">
                                                                     </div>
+                                                                    <div class="row text-center">
+                                                                        <div class="col-sm-12">
+                                                                            <h3 class="text-bold">REPUBLIC OF KENYA</h3>
+                                                                            <h4 class="text-bold">CERTIFICATE OF BIRTH</h4>
+                                                                            <h6 class="text-bold">ENTRY NUMBER <?php echo $births->reg_number; ?> </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Full Name</th>
+                                                                                <th>Date Of Birth</th>
+                                                                                <th>Sex</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><?php echo $births->name; ?></td>
+                                                                                <td><?php echo $births->dob; ?></td>
+                                                                                <td><?php echo $births->sex; ?></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Name And Surname Of Father</th>
+                                                                                <th>Name And Maiden Name Of Mother</th>
+                                                                                <th>Place Of Birth</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><?php echo $births->fathers_name; ?></td>
+                                                                                <td><?php echo $births->mothers_name; ?></td>
+                                                                                <td><?php echo $births->place_of_birth; ?></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Name Of Registering Officer</th>
+                                                                                <th>Date Of Registration</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><?php echo $births->registrar_name; ?></td>
+                                                                                <td><?php echo $births->created_at; ?></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <hr>
+                                                                    <h5 class="text-danger text-center ">
+                                                                        I <?php echo $births->registrar_name; ?> District / Assistant Registrar For Machakos District,
+                                                                        Hereby Certify That This Certificate Is Compiled From An Entry / Return In The Register Of
+                                                                        Births In The District.
+                                                                    </h5>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
@@ -98,7 +152,6 @@ require_once('../partials/head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Modal -->
-
                                             </td>
                                         </tr>
                                     <?php
