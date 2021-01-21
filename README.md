@@ -27,6 +27,5 @@ iRegistration is a prototype of a lightweight web based deaths and births regist
 ```
 
 # Tasks Assigns 
-```
-To view your assigned tasks, kindly log in here : http://pm.wcf.co.ke/
-```
+To view your assigned tasks, kindly log on <a target="_blank" href="http://pm.wcf.co.ke/">Here</a>
+
