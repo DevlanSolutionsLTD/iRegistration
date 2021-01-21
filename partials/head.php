@@ -21,6 +21,8 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <script src="../public/dist/js/swal.js"></script>
+  <!-- Certificates CSS -->
+  <link rel="stylesheet" href="../public/dist/css/certificate.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="../public/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!--Inject SWAL-->
