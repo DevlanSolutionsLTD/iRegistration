@@ -79,57 +79,20 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <div class="container-fluid">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12">
-                                                                                        <div class="text-center">
-                                                                                            <img class="img-fluid" height="150" width="150" src="../public/dist/img/Coat_Of_Arms.png">
-                                                                                        </div>
-                                                                                        <div class="row text-center">
-                                                                                            <div class="col-sm-12">
-                                                                                                <h3 class="text-bold">REPUBLIC OF KENYA</h3>
-                                                                                                <h4 class="text-bold">CERTIFICATE OF BIRTH</h4>
-                                                                                                <h6 class="text-bold">Entry No: <?php echo $births->reg_number;?> </h6>
-                                                                                            </div>
-
-                                                                                            <div class="col-sm-12">
-                                                                                                <p id="">Full Name: <?php echo $births->name;?></p>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12">
-                                                                                                <p class="">Date Of Birth: <?php echo $births->dob;?>, Sex : <?php echo $births->sex;?></b>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12">
-                                                                                                <p class="medium-font">Name And Surname Of Father: <?php echo $births->fathers_name;?></b>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12">
-                                                                                                <p class="light-bold">Name And Maiden Name Of Mother: <?php echo $births->mothers_name;?></p>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12 margin-prop">
-                                                                                                <p class="light-bold">Name Of Regestring Officer:  <?php echo $births->registrar_name;?></p>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12 margin-prop">
-                                                                                                <p class="light-bold">Date Of Registration <?php echo $births->created_at;?></p>
-                                                                                            </div>
-                                                                                            <div class="col-sm-12 margin-prop">
-                                                                                                <p class="text-danger">
-                                                                                                    I <?php echo $births->registrar_name;?> District / Assistant Registrar For Machakos District, 
-                                                                                                    Hereby Certify That This Certificate Is Compiled From An Entry / Return In The Register Of 
-                                                                                                    Births In The District.
-                                                                                                </p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                <div class="text-center">
+                                                                    <img class="img-fluid" height="150" width="150" src="../public/dist/img/Coat_Of_Arms.png">
+                                                                </div>
+                                                                <div class="row text-center">
+                                                                    <div class="col-sm-12">
+                                                                        <h3 class="text-bold">REPUBLIC OF KENYA</h3>
+                                                                        <h4 class="text-bold">CERTIFICATE OF BIRTH</h4>
+                                                                        <h6 class="text-bold">Entry No: <?php echo $births->reg_number; ?> </h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button id="print" onclick="printContent('Print_cert');" class="btn btn-default">Print Certificate</button>
                                                             </div>
                                                         </div>
                                                     </div>
