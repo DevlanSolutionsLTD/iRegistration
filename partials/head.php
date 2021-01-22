@@ -20,6 +20,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- DataTables -->
   <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" type="text/css" href="../public/plugins/datatable/custom_dt_html5.css">
   <script src="../public/dist/js/swal.js"></script>
   <!-- Certificates CSS -->
   <link rel="stylesheet" href="../public/dist/css/certificate.css">
