@@ -52,6 +52,54 @@ if (isset($_POST['update_profile'])) {
     }
 }
 /* Change Auth Details */
+if (isset($_POST['change_password'])) {
+    //Change Password
+    $error = 0;
+    if (isset($_POST['old_password']) && !empty($_POST['old_password'])) {
+        $old_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['old_password']))));
+    } else {
+        $error = 1;
+        $err = "Old Password Cannot Be Empty";
+    }
+    if (isset($_POST['new_password']) && !empty($_POST['new_password'])) {
+        $new_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['new_password']))));
+    } else {
+        $error = 1;
+        $err = "New Password Cannot Be Empty";
+    }
+    if (isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])) {
+        $confirm_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['confirm_password']))));
+    } else {
+        $error = 1;
+        $err = "Confirmation Password Cannot Be Empty";
+    }
+
+    if (!$error) {
+        $auth_id = $_SESSION['auth_id'];
+        $sql = "SELECT * FROM  authentication  WHERE auth_id = '$auth_id'";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($old_password != $row['password']) {
+                $err =  "Please Enter Correct Old Password";
+            } elseif ($new_password != $confirm_password) {
+                $err = "Confirmation Password Does Not Match";
+            } else {
+                $auth_id = $_SESSION['auth_id'];
+                $new_password  = sha1(md5($_POST['new_password']));
+                $query = "UPDATE authentication SET  auth_password =? WHERE auth_id =?";
+                $stmt = $mysqli->prepare($query);
+                $rc = $stmt->bind_param('ss', $new_password, $auth_id);
+                $stmt->execute();
+                if ($stmt) {
+                    $success = "Password Changed"  && header("refresh:1; url=profile.php");
+                } else {
+                    $err = "Please Try Again Or Try Later";
+                }
+            }
+        }
+    }
+}
 require_once('../partials/head.php');
 ?>
 
@@ -158,19 +206,19 @@ require_once('../partials/head.php');
                                                         <div class="row">
                                                             <div class="form-group col-md-4">
                                                                 <label for="">Old Password</label>
-                                                                <input type="password" required name="old_password" class="form-control">
+                                                                <input type="old_password" required name="old_password" class="form-control">
                                                             </div>
                                                             <div class="form-group col-md-4">
                                                                 <label for="">New Passwors</label>
-                                                                <input type="password" required name="new_password" class="form-control">
+                                                                <input type="new_password" required name="new_password" class="form-control">
                                                             </div>
                                                             <div class="form-group col-md-4">
                                                                 <label for="">Confirm New Passwors</label>
-                                                                <input type="password" required name="conform_password" class="form-control">
+                                                                <input type="confirm_password" required name="conform_password" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="text-right">
-                                                            <button type="submit" name="update_auth_settings " class="btn btn-primary">Submit</button>
+                                                            <button type="submit" name="update_auth_settings" class="btn btn-primary">Submit</button>
                                                         </div>
                                                     </form>
                                                 <?php
