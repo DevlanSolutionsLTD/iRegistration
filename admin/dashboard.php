@@ -75,7 +75,7 @@ require_once('../partials/head.php');
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Monthly Mortality Rate Reported In <?php echo date('Y'); ?></h3>
+                                    <h3 class="card-title">Age Sets Mortality Rate As Reported In <?php echo date('Y'); ?></h3>
                                 </div>
                                 <canvas id="mortalityRate" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
