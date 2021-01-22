@@ -80,7 +80,7 @@ if (isset($_POST['change_password'])) {
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
-            if ($old_password != $row['password']) {
+            if ($old_password != $row['auth_password']) {
                 $err =  "Please Enter Correct Old Password";
             } elseif ($new_password != $confirm_password) {
                 $err = "Confirmation Password Does Not Match";
@@ -206,19 +206,19 @@ require_once('../partials/head.php');
                                                         <div class="row">
                                                             <div class="form-group col-md-4">
                                                                 <label for="">Old Password</label>
-                                                                <input type="old_password" required name="old_password" class="form-control">
+                                                                <input type="password" required name="old_password" class="form-control">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label for="">New Passwors</label>
-                                                                <input type="new_password" required name="new_password" class="form-control">
+                                                                <label for="">New Password</label>
+                                                                <input type="password" required name="new_password" class="form-control">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label for="">Confirm New Passwors</label>
-                                                                <input type="confirm_password" required name="conform_password" class="form-control">
+                                                                <label for="">Confirm New Password</label>
+                                                                <input type="password" required name="confirm_password" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="text-right">
-                                                            <button type="submit" name="update_auth_settings" class="btn btn-primary">Submit</button>
+                                                            <button type="submit" name="change_password" class="btn btn-primary">Submit</button>
                                                         </div>
                                                     </form>
                                                 <?php
