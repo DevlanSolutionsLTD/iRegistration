@@ -17,7 +17,7 @@
                 </li>
                 <?php
                 /* Only System Admins Or Users Which Has A Can Touch This */
-                $auth_id = $_SESSION['auth_id'] ;
+                $auth_id = $_SESSION['auth_id'];
                 $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
                 $stmt = $mysqli->prepare($ret);
                 $stmt->execute(); //ok
@@ -50,7 +50,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="birth_rates.php" class="dropdown-item">Birth Rates</a></li>
                         <li><a href="death_rates.php" class="dropdown-item">Death Rates</a></li>
-                        <li><a href="population_density.php" class="dropdown-item">Population Density</a></li>
+                        <li><a href="mortality_birth_rates.php" class="dropdown-item">Overall Rates</a></li>
                     </ul>
                 </li>
             </ul>

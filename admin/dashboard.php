@@ -90,6 +90,7 @@ require_once('../partials/head.php');
                                 <div id="MortalityRatesXBirthRates" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
