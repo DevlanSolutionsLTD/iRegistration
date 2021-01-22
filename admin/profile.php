@@ -71,8 +71,14 @@ require_once('../partials/head.php');
                 <div class="content-header">
                     <div class="container">
                         <div class="row mb-2">
-                            <div class="col-sm-12">
-                                <h1 class="m-0 text-center text-dark"> Profile Settings </h1>
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-left text-dark"><?php echo $logged_in_user->name; ?> Profile</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Profile</li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -81,13 +87,6 @@ require_once('../partials/head.php');
                 <div class="content">
                     <div class="container">
                         <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="fas fa-user-edit"></i>
-
-                                    <?php echo $logged_in_user->name; ?> Update Profile
-                                </h3>
-                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-5 col-sm-3">
@@ -99,51 +98,88 @@ require_once('../partials/head.php');
                                     <div class="col-7 col-sm-9">
                                         <div class="tab-content" id="vert-tabs-tabContent">
                                             <div class="tab-pane text-left fade show active" id="user_information" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                                                <div class="card-body">
-                                                    <form method="post" enctype="multipart/form-data" role="form">
-
-                                                        <div class="row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="">Name</label>
-                                                                <input type="text" required name="name" value="<?php echo $logged_in_user->name; ?>" class="form-control" id="exampleInputEmail1">
-                                                                <input type="hidden" required name="id" value="<?php echo $logged_in_user->id; ?>" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label for="">ID / Passport Number</label>
-                                                                <input type="text" required name="national_idno" value="<?php echo $logged_in_user->national_idno; ?>" class="form-control">
-                                                            </div>
+                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Name</label>
+                                                            <input type="text" required name="name" value="<?php echo $logged_in_user->name; ?>" class="form-control" id="exampleInputEmail1">
+                                                            <input type="hidden" required name="id" value="<?php echo $logged_in_user->id; ?>" class="form-control">
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Email</label>
-                                                                <input type="email"  required name="email" value="<?php echo $logged_in_user->email; ?>" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Phone Number</label>
-                                                                <input type="text" required name="phone" value="<?php echo $logged_in_user->phone; ?>" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Gender</label>
-                                                                <select type="text" required name="sex" class="form-control basic">
-                                                                    <option><?php echo $logged_in_user->sex; ?></option>
-                                                                    <option>Male</option>
-                                                                    <option>Female</option>
-                                                                </select>
-                                                            </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">ID / Passport Number</label>
+                                                            <input type="text" required name="national_idno" value="<?php echo $logged_in_user->national_idno; ?>" class="form-control">
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-12">
-                                                                <label for="exampleInputPassword1">Address</label>
-                                                                <textarea required name="addr" rows="5" class="form-control"><?php echo $logged_in_user->addr; ?></textarea>
-                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Email</label>
+                                                            <input type="email" required name="email" value="<?php echo $logged_in_user->email; ?>" class="form-control">
                                                         </div>
-                                                        <div class="text-right">
-                                                            <button type="submit" name="update_profile" class="btn btn-primary">Submit</button>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Phone Number</label>
+                                                            <input type="text" required name="phone" value="<?php echo $logged_in_user->phone; ?>" class="form-control">
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Gender</label>
+                                                            <select type="text" required name="sex" class="form-control basic">
+                                                                <option><?php echo $logged_in_user->sex; ?></option>
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="exampleInputPassword1">Address</label>
+                                                            <textarea required name="addr" rows="5" class="form-control"><?php echo $logged_in_user->addr; ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <button type="submit" name="update_profile" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="tab-pane fade" id="auth_settings" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
+                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Name</label>
+                                                            <input type="text" required name="name" value="<?php echo $logged_in_user->name; ?>" class="form-control" id="exampleInputEmail1">
+                                                            <input type="hidden" required name="id" value="<?php echo $logged_in_user->id; ?>" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">ID / Passport Number</label>
+                                                            <input type="text" required name="national_idno" value="<?php echo $logged_in_user->national_idno; ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Email</label>
+                                                            <input type="email" required name="email" value="<?php echo $logged_in_user->email; ?>" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Phone Number</label>
+                                                            <input type="text" required name="phone" value="<?php echo $logged_in_user->phone; ?>" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Gender</label>
+                                                            <select type="text" required name="sex" class="form-control basic">
+                                                                <option><?php echo $logged_in_user->sex; ?></option>
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="exampleInputPassword1">Address</label>
+                                                            <textarea required name="addr" rows="5" class="form-control"><?php echo $logged_in_user->addr; ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <button type="submit" name="update_auth_settings" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
