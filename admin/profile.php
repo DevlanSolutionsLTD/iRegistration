@@ -140,46 +140,41 @@ require_once('../partials/head.php');
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade" id="auth_settings" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                                                <form method="post" enctype="multipart/form-data" role="form">
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="">Name</label>
-                                                            <input type="text" required name="name" value="<?php echo $logged_in_user->name; ?>" class="form-control" id="exampleInputEmail1">
-                                                            <input type="hidden" required name="id" value="<?php echo $logged_in_user->id; ?>" class="form-control">
+                                                <?php
+                                                $auth_id = $_SESSION['auth_id'];
+                                                $ret = "SELECT * FROM `authentication`  WHERE auth_id = '$auth_id'  ";
+                                                $stmt = $mysqli->prepare($ret);
+                                                $stmt->execute(); //ok
+                                                $res = $stmt->get_result();
+                                                while ($auth = $res->fetch_object()) { ?>
+                                                    <form method="post" enctype="multipart/form-data" role="form">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12">
+                                                                <label for="">Authentication Email Address</label>
+                                                                <input type="text" required name="auth_email" value="<?php echo $auth->auth_email; ?>" class="form-control" id="exampleInputEmail1">
+                                                                <input type="hidden" required name="auth_id" value="<?php echo $auth->id; ?>" class="form-control">
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="">ID / Passport Number</label>
-                                                            <input type="text" required name="national_idno" value="<?php echo $logged_in_user->national_idno; ?>" class="form-control">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Old Password</label>
+                                                                <input type="password" required name="old_password" class="form-control">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">New Passwors</label>
+                                                                <input type="password" required name="new_password" class="form-control">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Confirm New Passwors</label>
+                                                                <input type="password" required name="conform_password" class="form-control">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="">Email</label>
-                                                            <input type="email" required name="email" value="<?php echo $logged_in_user->email; ?>" class="form-control">
+                                                        <div class="text-right">
+                                                            <button type="submit" name="update_auth_settings " class="btn btn-primary">Submit</button>
                                                         </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="">Phone Number</label>
-                                                            <input type="text" required name="phone" value="<?php echo $logged_in_user->phone; ?>" class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="">Gender</label>
-                                                            <select type="text" required name="sex" class="form-control basic">
-                                                                <option><?php echo $logged_in_user->sex; ?></option>
-                                                                <option>Male</option>
-                                                                <option>Female</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-12">
-                                                            <label for="exampleInputPassword1">Address</label>
-                                                            <textarea required name="addr" rows="5" class="form-control"><?php echo $logged_in_user->addr; ?></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <button type="submit" name="update_auth_settings" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                <?php
+                                                } ?>
                                             </div>
                                         </div>
                                     </div>
