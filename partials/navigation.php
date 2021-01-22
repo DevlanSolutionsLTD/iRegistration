@@ -41,7 +41,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="birth_certificates.php" class="dropdown-item">Birth Certificates</a></li>
                         <li><a href="death_certificates.php" class="dropdown-item">Death Certificates</a></li>
-                        <li><a href="burial_permits.php" class="dropdown-item">Burial Permits</a></li>
+                     <!--<li><a href="burial_permits.php" class="dropdown-item">Burial Permits</a></li>-->
                     </ul>
                 </li>
 

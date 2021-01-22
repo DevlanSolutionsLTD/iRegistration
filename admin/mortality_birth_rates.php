@@ -62,9 +62,9 @@ require_once('../partials/head.php');
                 </div>
             </div>
             <!-- Print The Given Page Details -->
-            <div class="text-center">
+         <!--<div class="text-center">
                 <button id="print" onclick="printContent('Print_Report');" class="btn btn-default">Print This Page</button>
-            </div>
+            </div>-->
             <br>
         </div>
 
