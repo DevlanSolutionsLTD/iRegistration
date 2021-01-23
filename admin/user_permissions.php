@@ -41,7 +41,7 @@ if (isset($_POST['add_auth_permission'])) {
         $err = "Auth Status Cannot Be Empty";
     }
 
-    
+
     if (!$error) {
         /* 
             Auth Permissions Logic
@@ -51,13 +51,20 @@ if (isset($_POST['add_auth_permission'])) {
         $authDetails = "INSERT INTO authentication (auth_id, auth_permission, auth_email, auth_password) VALUES(?,?,?,?)";
         $userAuthStatus = "UPDATE users SET auth_id = ?, auth_status = ? WHERE email = ?";
 
-        $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('ssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $sex, $fathers_name, $mothers_name, $place_of_birth, $month_reg, $year_reg, $created_at);
-        $stmt->execute();
-        if ($stmt) {
-            $success = "Added" && header("refresh:1; url=births_registration.php");
+        $authDetailsStmt = $mysqli->prepare($authDetails);
+        $userAuthStatusStmt = $mysqli->prepare($userAuthStatus);
+
+        $rc = $authDetailsStmt->bind_param('ssss', $auth_id, $auth_permission, $auth_email, $auth_passsword);
+        $rc = $userAuthStatusStmt->bind_param('sss', $auth_id, $auth_status, $auth_email);
+
+        $authDetailsStmt->execute();
+        $userAuthStatusStmt->execute();
+
+        if ($authDetailsStmt && $serAuthStatusStmt) {
+
+            $success = "Auth Permissions Added" && header("refresh:1; url=user_permissions.php");
         } else {
-            //inject alert that profile update task failed
+            //Inject alert
             $info = "Please Try Again Or Try Later";
         }
     }
