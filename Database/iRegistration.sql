@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2021 at 12:42 PM
+-- Generation Time: Jan 23, 2021 at 11:25 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.26
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `authentication` (
   `auth_id` varchar(200) NOT NULL,
-  `auth_permission` int(20) NOT NULL,
+  `auth_permission` varchar(200) NOT NULL,
   `auth_email` varchar(200) NOT NULL,
   `auth_password` varchar(200) NOT NULL,
   `created_at` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
@@ -41,7 +41,13 @@ CREATE TABLE `authentication` (
 --
 
 INSERT INTO `authentication` (`auth_id`, `auth_permission`, `auth_email`, `auth_password`, `created_at`) VALUES
-('a69681bcf334ae130217fea4505fd3c994f5683f', 1, 'sysadmin@mail.com', 'adcd7048512e64b48da55b027577886ee5a36350', '2021-01-18 06:15:18.770217');
+('1f971de9a3a5fbed09854a04544b41f58ac2dd5358', 'Administrator', 'reg004@iregstration.org', 'a69681bcf334ae130217fea4505fd3c994f5683f', '2021-01-23 09:46:08.949739'),
+('360c682818749388576a9a76895491a5c50dd8bced', 'Administrator', 'reg003@iregstration.org', 'a69681bcf334ae130217fea4505fd3c994f5683f', '2021-01-23 09:45:31.933592'),
+('4333f9a3594d50cd48761cb8019399d645911c5956', 'Registrar', 'reg007@iregstration.org', 'a69681bcf334ae130217fea4505fd3c994f5683f', '2021-01-23 09:49:06.326579'),
+('8b26640c2428850f218c24ff0128b45b2fce655cfe', 'Administrator', 'reg006@iregstration.org', 'a69681bcf334ae130217fea4505fd3c994f5683f', '2021-01-23 09:48:52.770057'),
+('a69681bcf334ae130217fea4505fd3c994f5683f', 'Administrator', 'sysadmin@mail.com', 'adcd7048512e64b48da55b027577886ee5a36350', '2021-01-23 09:45:09.520861'),
+('e42c34b9bbca8c2d93847a2931a0580ac86b513d30', 'Registrar', 'reg005@iregstration.org', 'a69681bcf334ae130217fea4505fd3c994f5683f', '2021-01-23 09:47:58.931798'),
+('f07fdc5ffebc494c00946d364cca0ebf06c31a97a8', 'Registrar', 'reg008@iregstration.org', 'adcd7048512e64b48da55b027577886ee5a36350', '2021-01-23 10:05:40.690972');
 
 -- --------------------------------------------------------
 
@@ -661,9 +667,6 @@ CREATE TABLE `deaths_registration` (
 --
 
 INSERT INTO `deaths_registration` (`id`, `reg_number`, `registrar_name`, `name`, `dob`, `age`, `sex`, `occupation`, `place_of_death`, `tribe`, `month_reg`, `year_reg`, `created_at`, `updated_at`) VALUES
-('a5557fbd8de871452784eb0dc23467e2f27881d001', 'X20VF-56429', 'Registrar 002', 'Jane F Doe', '12/07/1990', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Jan', '2021', '20 Jan 2021', ''),
-('a5557fbd8de871452784eb0dc23467e2f27881d002', 'X20VF-56430', 'Registrar 003', 'John Doe', '12/07/1991', '21', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Feb', '2000', '20 Jan 2021', ''),
-('a5557fbd8de871452784eb0dc23467e2f27881d003', 'X20VF-56431', 'Registrar 004', 'Deceased 001', '12/07/1992', '22', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Mar', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d004', 'X20VF-56432', 'Registrar 005', 'Deceased 002', '12/07/1993', '23', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Apr', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d005', 'X20VF-56433', 'Registrar 006', 'Deceased 003', '12/07/1994', '24', 'Male', 'Farmer', 'Machakos', 'Kamba', 'May', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d006', 'X20VF-56434', 'Registrar 007', 'Deceased 004', '12/07/1995', '25', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Jun', '2021', '20 Jan 2021', ''),
@@ -740,7 +743,6 @@ INSERT INTO `deaths_registration` (`id`, `reg_number`, `registrar_name`, `name`,
 ('a5557fbd8de871452784eb0dc23467e2f27881d077', 'X20VF-56505', 'Registrar 031', 'Deceased 075', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'May', '2000', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d078', 'X20VF-56506', 'Registrar 032', 'Deceased 076', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Jun', '2000', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d079', 'X20VF-56507', 'Registrar 033', 'Deceased 077', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Jul', '2000', '20 Jan 2021', ''),
-('a5557fbd8de871452784eb0dc23467e2f27881d07f', 'X20VF-56429', 'Registrar 002', 'Jane F Doe', '12/07/1990', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Jan', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d080', 'X20VF-56508', 'Registrar 034', 'Deceased 078', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Aug', '2000', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d081', 'X20VF-56509', 'Registrar 035', 'Deceased 079', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Sep', '2000', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d082', 'X20VF-56510', 'Registrar 036', 'Deceased 080', '12/07/2020', '20', 'Male', 'Farmer', 'Machakos', 'Kamba', 'Oct', '2000', '20 Jan 2021', ''),
@@ -923,12 +925,12 @@ INSERT INTO `deaths_registration` (`id`, `reg_number`, `registrar_name`, `name`,
 ('a5557fbd8de871452784eb0dc23467e2f27881d259', 'X20VF-56687', 'Registrar 085', 'Deceased 257', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Jul', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d260', 'X20VF-56688', 'Registrar 085', 'Deceased 258', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Aug', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d261', 'X20VF-56689', 'Registrar 085', 'Deceased 259', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Sep', '2021', '20 Jan 2021', ''),
-('a5557fbd8de871452784eb0dc23467e2f27881d262', 'X20VF-56690', 'Registrar 085', 'Deceased 260', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Oct', '2021', '20 Jan 2021', '');
-INSERT INTO `deaths_registration` (`id`, `reg_number`, `registrar_name`, `name`, `dob`, `age`, `sex`, `occupation`, `place_of_death`, `tribe`, `month_reg`, `year_reg`, `created_at`, `updated_at`) VALUES
+('a5557fbd8de871452784eb0dc23467e2f27881d262', 'X20VF-56690', 'Registrar 085', 'Deceased 260', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Oct', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d263', 'X20VF-56691', 'Registrar 085', 'Deceased 261', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Nov', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d264', 'X20VF-56692', 'Registrar 085', 'Deceased 262', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Dec', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d265', 'X20VF-56693', 'Registrar 085', 'Deceased 263', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Jan', '2021', '20 Jan 2021', ''),
-('a5557fbd8de871452784eb0dc23467e2f27881d266', 'X20VF-56694', 'Registrar 085', 'Deceased 264', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Feb', '2021', '20 Jan 2021', ''),
+('a5557fbd8de871452784eb0dc23467e2f27881d266', 'X20VF-56694', 'Registrar 085', 'Deceased 264', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Feb', '2021', '20 Jan 2021', '');
+INSERT INTO `deaths_registration` (`id`, `reg_number`, `registrar_name`, `name`, `dob`, `age`, `sex`, `occupation`, `place_of_death`, `tribe`, `month_reg`, `year_reg`, `created_at`, `updated_at`) VALUES
 ('a5557fbd8de871452784eb0dc23467e2f27881d267', 'X20VF-56695', 'Registrar 085', 'Deceased 265', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Mar', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d268', 'X20VF-56696', 'Registrar 086', 'Deceased 266', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'Apr', '2021', '20 Jan 2021', ''),
 ('a5557fbd8de871452784eb0dc23467e2f27881d269', 'X20VF-56697', 'Registrar 087', 'Deceased 267', '12/07/2020', '10', 'Male', 'Driver', 'Machakos', 'Kamba', 'May', '2021', '20 Jan 2021', ''),
@@ -1168,13 +1170,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `auth_id`, `name`, `national_idno`, `phone`, `email`, `addr`, `sex`, `created_at`, `updated_at`, `auth_status`) VALUES
-('3b5994489b47efaad5243e64c287fb480f6badb129', '', 'Registrar 002', '127654290', '740847563', 'reg002@iregstration.org', '90125 Machakos', 'Male', '01/18/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb130', '', 'Registrar 003', '127654291', '740847564', 'reg003@iregstration.org', '90126 Machakos', 'Male', '01/19/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb131', '', 'Registrar 004', '127654292', '740847565', 'reg004@iregstration.org', '90127 Machakos', 'Male', '01/20/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb132', '', 'Registrar 005', '127654293', '740847566', 'reg005@iregstration.org', '90128 Machakos', 'Male', '01/21/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb133', '', 'Registrar 006', '127654294', '740847567', 'reg006@iregstration.org', '90129 Machakos', 'Male', '01/22/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb134', '', 'Registrar 007', '127654295', '740847568', 'reg007@iregstration.org', '90130 Machakos', 'Male', '01/23/21', '', ''),
-('3b5994489b47efaad5243e64c287fb480f6badb135', '', 'Registrar 008', '127654296', '740847569', 'reg008@iregstration.org', '90131 Machakos', 'Male', '01/24/21', '', ''),
+('3b5994489b47efaad5243e64c287fb480f6badb129', '', 'Registrar 002', '127654290', '740847563', 'reg002@iregstration.org', '90125 Machakos', 'Male', '01/18/21', '', 'Revoked'),
+('3b5994489b47efaad5243e64c287fb480f6badb130', '360c682818749388576a9a76895491a5c50dd8bced', 'Registrar 003', '127654291', '740847564', 'reg003@iregstration.org', '90126 Machakos', 'Male', '01/19/21', '', 'Can_Login'),
+('3b5994489b47efaad5243e64c287fb480f6badb131', '1f971de9a3a5fbed09854a04544b41f58ac2dd5358', 'Registrar 004', '127654292', '740847565', 'reg004@iregstration.org', '90127 Machakos', 'Male', '01/20/21', '', 'Can_Login'),
+('3b5994489b47efaad5243e64c287fb480f6badb132', 'e42c34b9bbca8c2d93847a2931a0580ac86b513d30', 'Registrar 005', '127654293', '740847566', 'reg005@iregstration.org', '90128 Machakos', 'Male', '01/21/21', '', 'Can_Login'),
+('3b5994489b47efaad5243e64c287fb480f6badb133', '8b26640c2428850f218c24ff0128b45b2fce655cfe', 'Registrar 006', '127654294', '740847567', 'reg006@iregstration.org', '90129 Machakos', 'Male', '01/22/21', '', 'Can_Login'),
+('3b5994489b47efaad5243e64c287fb480f6badb134', '4333f9a3594d50cd48761cb8019399d645911c5956', 'Registrar 007', '127654295', '740847568', 'reg007@iregstration.org', '90130 Machakos', 'Male', '01/23/21', '', 'Can_Login'),
+('3b5994489b47efaad5243e64c287fb480f6badb135', 'f07fdc5ffebc494c00946d364cca0ebf06c31a97a8', 'Registrar 008', '127654296', '740847569', 'reg008@iregstration.org', '90131 Machakos', 'Male', '01/24/21', '', 'Can_Login'),
 ('3b5994489b47efaad5243e64c287fb480f6badb136', '', 'Registrar 009', '127654297', '740847570', 'reg009@iregstration.org', '90132 Machakos', 'Male', '01/25/21', '', ''),
 ('3b5994489b47efaad5243e64c287fb480f6badb137', '', 'Registrar 010', '127654298', '740847571', 'reg010@iregstration.org', '90133 Machakos', 'Male', '01/26/21', '', ''),
 ('3b5994489b47efaad5243e64c287fb480f6badb138', '', 'Registrar 011', '127654299', '740847572', 'reg011@iregstration.org', '90134 Machakos', 'Male', '01/27/21', '', ''),
@@ -1267,7 +1269,7 @@ INSERT INTO `users` (`id`, `auth_id`, `name`, `national_idno`, `phone`, `email`,
 ('3b5994489b47efaad5243e64c287fb480f6badb225', '', 'Registrar 098', '127654386', '740847659', 'reg098@iregstration.org', '90170 Makueni', 'Female', '01/18/21', '', ''),
 ('3b5994489b47efaad5243e64c287fb480f6badb226', '', 'Registrar 099', '127654387', '740847660', 'reg099@iregstration.org', '90171 Makueni', 'Female', '01/18/21', '', ''),
 ('3b5994489b47efaad5243e64c287fb480f6badb227', '', 'Registrar 100', '127654388', '740847661', 'reg100@iregstration.org', '90172 Makueni', 'Male', '01/18/21', '18 Jan 2021', ''),
-('c76daa9fadc4b42551bb52ebd399916edfe554fa', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'System Administrator', '127992', '+3548995432', 'sysadmin@mail.com', '239-9-9 Localhost', 'Male', '12 Dec 2020', '', 'Active');
+('brt569681bcf334ae130217fea4505fd3c994f5683f', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Sys Admin', '127001765', '+25473086542', 'sysadmin@mail.com', '127001 Localhost', 'Female', '01/18/21', '22 Jan 2021', 'Can_Login');
 
 --
 -- Indexes for dumped tables
