@@ -24,6 +24,9 @@ iRegistration is a prototype of a lightweight web based deaths and births regist
     System Admin:
         Email: sysadmin@mail.com
         Password: 123
+    Registrar
+        Email :reg002@iregstration.org
+        password : 123
 ```
 
 # Tasks Assigns 
