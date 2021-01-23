@@ -41,13 +41,7 @@ if (isset($_POST['add_auth_permission'])) {
         $err = "Auth Status Cannot Be Empty";
     }
 
-    if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
-        $auth_status = mysqli_real_escape_string($mysqli, trim($_POST['user_id']));
-    } else {
-        $error = 1;
-        $err = "User ID  Cannot Be Empty";
-    }
-
+    
     if (!$error) {
         /* 
             Auth Permissions Logic
@@ -55,7 +49,7 @@ if (isset($_POST['add_auth_permission'])) {
             2. Update Users Table Add Auth ID And Auth Status
          */
         $authDetails = "INSERT INTO authentication (auth_id, auth_permission, auth_email, auth_password) VALUES(?,?,?,?)";
-        $userAuthStatus = "UPDATE users SET auth_id = ?, auth_status = ? WHERE user_id = ?";
+        $userAuthStatus = "UPDATE users SET auth_id = ?, auth_status = ? WHERE email = ?";
 
         $stmt = $mysqli->prepare($query);
         $rc = $stmt->bind_param('ssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $sex, $fathers_name, $mothers_name, $place_of_birth, $month_reg, $year_reg, $created_at);
@@ -115,24 +109,21 @@ require_once('../partials/head.php');
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label for="">User Email</label>
-                                                    <select type="text" required name="auth_email" id="AuthUserEmail" onchange="getAuthUserName(this.value);" class="form-control basic">
-                                                        <option>Select User Email</option>
+                                                    <select class='form-control basic' name="auth_email">
+                                                        <option selected>Select User Email Address</option>
                                                         <?php
-                                                        /* Select Users Which Has No Auth Permissions Or Auth Permissions Are Revoked */
                                                         $ret = "SELECT * FROM `users` WHERE auth_status != 'Can_Login' ";
                                                         $stmt = $mysqli->prepare($ret);
                                                         $stmt->execute(); //ok
                                                         $res = $stmt->get_result();
-                                                        while ($Users = $res->fetch_object()) {
+                                                        while ($user = $res->fetch_object()) {
                                                         ?>
-                                                            <option><?php echo $Users->email; ?></option>
-
+                                                            <option><?php echo $user->email; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <!-- Hide This -->
                                                     <input type="hidden" required name="auth_id" value="<?php echo $ID; ?>" class="form-control">
                                                     <input type="hidden" required name="auth_status" value="Can_Login" class="form-control">
-                                                    <input type="text" required name="user_id" id="AuthUserId" class="form-control">
                                                 </div>
                                             </div>
 
