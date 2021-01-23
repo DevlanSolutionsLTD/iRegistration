@@ -72,7 +72,7 @@ if (isset($_POST['add_auth_permission'])) {
 }
 
 
-if (isset($_POST['revoke'])) {
+if (isset($_GET['revoke'])) {
     /* 
         Revoke User Auth Crendetials
         Logic
@@ -101,7 +101,7 @@ if (isset($_POST['revoke'])) {
 
     if ($revokeAuthStmt && $clearAuthStatusStmt) {
 
-        $success = "Revoked Auth Permissions" && header("refresh:1; url=user_permisions.php");
+        $success = "Revoked Auth Permissions" && header("refresh:1; url=user_permissions.php");
     } else {
         //inject alert that task failed
         $info = "Please Try Again Or Try Later";
@@ -251,7 +251,7 @@ require_once('../partials/head.php');
                                                                 <h4>Revoke <br> <?php echo $AuthUsers->name; ?> <br> Authentication Permissions ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="user_permissions.php?revoke=<?php echo $AuthUsers->auth_id; ?>&auth_status=Revoked" class="text-center btn btn-danger"> Revoke </a>
+                                                                <a href="user_permissions.php?revoke=<?php echo $AuthUsers->auth_id; ?>&auth_status=Revoked&auth_email=<?php echo $AuthUsers->email; ?>" class="text-center btn btn-danger"> Revoke </a>
                                                             </div>
                                                         </div>
                                                     </div>
