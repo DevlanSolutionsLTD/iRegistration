@@ -1,25 +1,49 @@
 <?php
 session_start();
-include('../config/config.php');
+include '../config/config.php';
 
 if (isset($_POST['login'])) {
     $auth_email = $_POST['auth_email'];
-    $auth_permission = 'Administrator';
+    $auth_permission = $_POST['auth_permisssion'];
     $auth_password = sha1(md5($_POST['auth_password'])); //double encrypt to increase security
-    $stmt = $mysqli->prepare("SELECT auth_email, auth_password, auth_permission, auth_id  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?");
-    $stmt->bind_param('sss', $auth_email, $auth_password, $auth_permission); //bind fetched parameters
-    $stmt->execute(); //execute bind 
-    $stmt->bind_result($auth_email, $auth_password, $auth_permission, $auth_id); //bind result
-    $rs = $stmt->fetch();
-    $_SESSION['auth_id'] = $auth_id;
-    $_SESSION['auth_email'] = $auth_email;
-    if ($rs) {
-        header("location:dashboard.php");
+    //checkout user type
+    if ($auth_permission == 'Administrator') {
+        $stmt = $mysqli->prepare(
+            'SELECT auth_email, auth_password, auth_permission, auth_id  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?'
+        );
+        $stmt->bind_param('sss', $auth_email, $auth_password, $auth_permission); //bind fetched parameters
+        $stmt->execute(); //execute bind
+        $stmt->bind_result($auth_email, $auth_password, $auth_permission, $auth_id); //bind result
+        $rs = $stmt->fetch();
+        $_SESSION['auth_id'] = $auth_id;
+        $_SESSION['auth_email'] = $auth_email;
+        if ($rs) {
+            header('location:dashboard.php');
+        } else {
+            $err = 'Access Denied Please Check Your Credentials';
+        }
+
     } else {
-        $err = "Access Denied Please Check Your Credentials";
+        $stmt = $mysqli->prepare(
+            'SELECT auth_email, auth_password, auth_permission, auth_id  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?'
+        );
+        $stmt->bind_param('sss', $auth_email, $auth_password, $auth_permission); //bind fetched parameters
+        $stmt->execute(); //execute bind
+        $stmt->bind_result($auth_email, $auth_password, $auth_permission, $auth_id); //bind result
+        $rs = $stmt->fetch();
+        $_SESSION['auth_id'] = $auth_id;
+        $_SESSION['auth_email'] = $auth_email;
+        if ($rs) {
+            header('location:../registrar/dashboard.php');
+        } else {
+            $err = 'Access Denied Please Check Your Credentials';
+        }
+        
     }
+
+   
 }
-require_once('../partials/head.php');
+require_once '../partials/head.php';
 ?>
 
 <body class="hold-transition login-page">
@@ -45,7 +69,17 @@ require_once('../partials/head.php');
 
                     <div class="input-group mb-3">
                         <input type="password" name="auth_password" class="form-control" placeholder="Password">
-                        <input type="hidden" name="auth_permission" value="1" class="form-control" >
+                        <div class="input-group">
+                           <select class="custom-select" id="inputGroupSelect04" name="auth_permisssion" aria-label="Example select with button addon">
+                                <option selected>User type</option>
+                                <option value="Registrar">Registrar</option>
+                                 <option value="Administrator">Admin</option>
+    
+                             </select>
+  
+                    </div>
+                  
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -77,7 +111,7 @@ require_once('../partials/head.php');
         </div>
     </div>
     <!-- /.login-box -->
-    <?php require_once('../partials/scripts.php'); ?>
+    <?php require_once '../partials/scripts.php'; ?>
 </body>
 
 </html>
