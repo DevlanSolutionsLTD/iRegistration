@@ -15,20 +15,6 @@
                 <li class="nav-item">
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
-                <?php
-                /* Only System Admins Or Users Which Has A Can Touch This */
-                $auth_id = $_SESSION['auth_id'];
-                $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
-                $stmt = $mysqli->prepare($ret);
-                $stmt->execute(); //ok
-                $res = $stmt->get_result();
-                while ($AllowedUser = $res->fetch_object()) {
-                ?>
-                    <li class="nav-item">
-                        <a href="registras.php" class="nav-link">Registras</a>
-                    </li>
-                <?php
-                } ?>
 
                 <li class="nav-item">
                     <a href="births_registration.php" class="nav-link">Births Registration</a>
@@ -41,7 +27,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="birth_certificates.php" class="dropdown-item">Birth Certificates</a></li>
                         <li><a href="death_certificates.php" class="dropdown-item">Death Certificates</a></li>
-                     <!--<li><a href="burial_permits.php" class="dropdown-item">Burial Permits</a></li>-->
+                        <!--<li><a href="burial_permits.php" class="dropdown-item">Burial Permits</a></li>-->
                     </ul>
                 </li>
 
@@ -53,8 +39,28 @@
                         <li><a href="mortality_birth_rates.php" class="dropdown-item">Overall Rates</a></li>
                     </ul>
                 </li>
+                <?php
+                /* Only System Admins Or Users Which Has A Can Touch This */
+                $auth_id = $_SESSION['auth_id'];
+                $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
+                $stmt = $mysqli->prepare($ret);
+                $stmt->execute(); //ok
+                $res = $stmt->get_result();
+                while ($AllowedUser = $res->fetch_object()) {
+                ?>
+                    <li class="nav-item">
+                        <a href="registras.php" class="nav-link">Registras</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="user_permissions.php" class="nav-link">User Permissions</a>
+                    </li>
+                <?php
+                } ?>
             </ul>
         </div>
+
+
 
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
