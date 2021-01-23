@@ -64,11 +64,47 @@ if (isset($_POST['add_auth_permission'])) {
         if ($authDetailsStmt && $userAuthStatusStmt) {
 
             $success = "Auth Permissions Added" && header("refresh:1; url=user_permissions.php");
-
         } else {
             //Inject alert
             $info = "Please Try Again Or Try Later";
         }
+    }
+}
+
+
+if (isset($_POST['revoke'])) {
+    /* 
+        Revoke User Auth Crendetials
+        Logic
+        1. Delete Auth User Details From Auth table
+        2. Delete Auth ID And Auth Status From Users Table
+    */
+
+    $auth_id = $_GET['revoke'];
+    $auth_email = $_GET['auth_email'];
+    $auth_status = $_GET['auth_status'];
+
+    $revokeAuth = "DELETE FROM authentication  WHERE auth_id =?";
+    $clearAuthStatus = "UPDATE users SET auth_id ='', auth_status = ? WHERE email = ?";
+
+    $revokeAuthStmt = $mysqli->prepare($revokeAuth);
+    $clearAuthStatusStmt = $mysqli->prepare($clearAuthStatus);
+
+    $revokeAuthStmt->bind_param('s', $auth_id);
+    $clearAuthStatusStmt->bind_param('ss', $auth_status, $auth_email);
+
+    $revokeAuthStmt->execute();
+    $clearAuthStatusStmt->execute();
+
+    $revokeAuthStmt->close();
+    $clearAuthStatusStmt->close();
+
+    if ($revokeAuthStmt && $clearAuthStatusStmt) {
+
+        $success = "Revoked Auth Permissions" && header("refresh:1; url=user_permisions.php");
+    } else {
+        //inject alert that task failed
+        $info = "Please Try Again Or Try Later";
     }
 }
 
@@ -215,7 +251,7 @@ require_once('../partials/head.php');
                                                                 <h4>Revoke <br> <?php echo $AuthUsers->name; ?> <br> Authentication Permissions ?</h4>
                                                                 <br>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="user_permissions.php?revoke=<?php echo $AuthUsers->id; ?>&auth_status=Revoked" class="text-center btn btn-danger"> Revoke </a>
+                                                                <a href="user_permissions.php?revoke=<?php echo $AuthUsers->auth_id; ?>&auth_status=Revoked" class="text-center btn btn-danger"> Revoke </a>
                                                             </div>
                                                         </div>
                                                     </div>
