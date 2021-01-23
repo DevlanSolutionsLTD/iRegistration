@@ -14,8 +14,8 @@ if (isset($_POST['add_auth_permission'])) {
         $error = 1;
         $err = "Email Address Cannot Be Empty";
     }
-    if (isset($_POST['auth_passsword']) && !empty($_POST['auth_passsword'])) {
-        $auth_passsword = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['auth_passsword']))));
+    if (isset($_POST['auth_password']) && !empty($_POST['auth_password'])) {
+        $auth_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['auth_password']))));
     } else {
         $error = 1;
         $err = "Auth Password Cannot Be Empty";
@@ -47,22 +47,24 @@ if (isset($_POST['add_auth_permission'])) {
             Auth Permissions Logic
             1. Insert User Auth Details On Auth Table
             2. Update Users Table Add Auth ID And Auth Status
-         */
+        */
+
         $authDetails = "INSERT INTO authentication (auth_id, auth_permission, auth_email, auth_password) VALUES(?,?,?,?)";
         $userAuthStatus = "UPDATE users SET auth_id = ?, auth_status = ? WHERE email = ?";
 
         $authDetailsStmt = $mysqli->prepare($authDetails);
         $userAuthStatusStmt = $mysqli->prepare($userAuthStatus);
 
-        $rc = $authDetailsStmt->bind_param('ssss', $auth_id, $auth_permission, $auth_email, $auth_passsword);
+        $rc = $authDetailsStmt->bind_param('ssss', $auth_id, $auth_permission, $auth_email, $auth_password);
         $rc = $userAuthStatusStmt->bind_param('sss', $auth_id, $auth_status, $auth_email);
 
         $authDetailsStmt->execute();
         $userAuthStatusStmt->execute();
 
-        if ($authDetailsStmt && $serAuthStatusStmt) {
+        if ($authDetailsStmt && $userAuthStatusStmt) {
 
             $success = "Auth Permissions Added" && header("refresh:1; url=user_permissions.php");
+
         } else {
             //Inject alert
             $info = "Please Try Again Or Try Later";
@@ -142,8 +144,8 @@ require_once('../partials/head.php');
                                                 <div class="form-group col-md-4">
                                                     <label for="">Auth Permissions</label>
                                                     <select type="text" required name="auth_permission" class="form-control basic">
-                                                        <option value="0">Registrar</option>
-                                                        <option value="1">Administrator</option>
+                                                        <option>Registrar</option>
+                                                        <option>Administrator</option>
                                                     </select>
                                                 </div>
                                             </div>

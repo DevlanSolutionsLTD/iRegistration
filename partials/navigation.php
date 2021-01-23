@@ -42,7 +42,7 @@
                 <?php
                 /* Only System Admins Or Users Which Has A Can Touch This */
                 $auth_id = $_SESSION['auth_id'];
-                $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = '1' ";
+                $ret = "SELECT * FROM `authentication` WHERE auth_id ='$auth_id' AND auth_permission = 'Administrator' ";
                 $stmt = $mysqli->prepare($ret);
                 $stmt->execute(); //ok
                 $res = $stmt->get_result();
