@@ -4,6 +4,71 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 
+if (isset($_POST['add_auth_permission'])) {
+    /* Give User Auth Permission */
+    $error = 0;
+
+    if (isset($_POST['auth_email']) && !empty($_POST['auth_email'])) {
+        $auth_email = mysqli_real_escape_string($mysqli, trim($_POST['auth_email']));
+    } else {
+        $error = 1;
+        $err = "Email Address Cannot Be Empty";
+    }
+    if (isset($_POST['auth_passsword']) && !empty($_POST['auth_passsword'])) {
+        $auth_passsword = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['auth_passsword']))));
+    } else {
+        $error = 1;
+        $err = "Auth Password Cannot Be Empty";
+    }
+
+    if (isset($_POST['auth_permission']) && !empty($_POST['auth_permission'])) {
+        $auth_permission = mysqli_real_escape_string($mysqli, trim($_POST['auth_permission']));
+    } else {
+        $error = 1;
+        $err = "Auth Permissions Cannot Be Empty";
+    }
+    if (isset($_POST['auth_id']) && !empty($_POST['auth_id'])) {
+        $auth_id = mysqli_real_escape_string($mysqli, trim($_POST['auth_id']));
+    } else {
+        $error = 1;
+        $err = "Auth ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['auth_status']) && !empty($_POST['auth_status'])) {
+        $auth_status = mysqli_real_escape_string($mysqli, trim($_POST['auth_status']));
+    } else {
+        $error = 1;
+        $err = "Auth Status Cannot Be Empty";
+    }
+
+    if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
+        $auth_status = mysqli_real_escape_string($mysqli, trim($_POST['user_id']));
+    } else {
+        $error = 1;
+        $err = "User ID  Cannot Be Empty";
+    }
+
+    if (!$error) {
+        /* 
+            Auth Permissions Logic
+            1. Insert User Auth Details On Auth Table
+            2. Update Users Table Add Auth ID And Auth Status
+         */
+        $authDetails = "INSERT INTO authentication (auth_id, auth_permission, auth_email, auth_password) VALUES(?,?,?,?)";
+        $userAuthStatus = "UPDATE users SET auth_id = ?, auth_status = ? WHERE user_id = ?";
+
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('ssssssssssss', $id, $reg_number, $registrar_name, $name, $dob, $sex, $fathers_name, $mothers_name, $place_of_birth, $month_reg, $year_reg, $created_at);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Added" && header("refresh:1; url=births_registration.php");
+        } else {
+            //inject alert that profile update task failed
+            $info = "Please Try Again Or Try Later";
+        }
+    }
+}
+
 require_once('../partials/head.php');
 
 ?>
@@ -67,7 +132,7 @@ require_once('../partials/head.php');
                                                     <!-- Hide This -->
                                                     <input type="hidden" required name="auth_id" value="<?php echo $ID; ?>" class="form-control">
                                                     <input type="hidden" required name="auth_status" value="Can_Login" class="form-control">
-
+                                                    <input type="text" required name="user_id" id="AuthUserId" class="form-control">
                                                 </div>
                                             </div>
 
@@ -78,7 +143,7 @@ require_once('../partials/head.php');
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Auth Permissions</label>
-                                                    <select type="text" required name="sex" class="form-control basic">
+                                                    <select type="text" required name="auth_permission" class="form-control basic">
                                                         <option value="0">Registrar</option>
                                                         <option value="1">Administrator</option>
                                                     </select>

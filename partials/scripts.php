@@ -96,3 +96,17 @@
         "pageLength": 7
     });
 </script>
+<script>
+    function getAuthUserName(val) {
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'AuthUserEmail=' + val,
+            success: function(data) {
+                //alert(data);
+                $('#AuthUserId').val(data);
+            }
+        });
+
+    }
+</script>
