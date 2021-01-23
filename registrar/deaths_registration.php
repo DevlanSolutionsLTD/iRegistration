@@ -230,9 +230,9 @@ if (isset($_POST['update_death'])) {
 
 
 
-if (isset($_GET['delete_death_record'])) {
+/*if (isset($_GET['delete_death_record'])) {
     /* Handle Death Records Deletion Here */
-    $id = $_GET['delete_death_record'];
+    /*$id = $_GET['delete_death_record'];
     $adn = "DELETE FROM deaths_registration WHERE id=?";
     $stmt = $conn->prepare($adn);
     $stmt->bind_param('s', $id);
@@ -244,7 +244,7 @@ if (isset($_GET['delete_death_record'])) {
         //inject alert that task failed
         $info = "Please Try Again Or Try Later";
     }
-}
+}*/
 
 
 require_once('../partials/head.php');
@@ -524,29 +524,9 @@ require_once('../partials/head.php');
                                                 <!-- End Modal -->
 
 
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete_birth-<?php echo $deaths->id; ?>">
-                                                    <i class="fas fa-trash"></i>
-                                                    Delete
-                                                </a>
-                                                <!-- Delete Confirmation Modal -->
-                                                <div class="modal fade" id="delete_birth-<?php echo $deaths->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-center text-danger">
-                                                                <h4>Delete <?php echo $deaths->name; ?> - <?php echo $deaths->reg_number; ?> Death Record ?</h4>
-                                                                <br>
-                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="deaths_registration.php?delete_death_record=<?php echo $deaths->id; ?>" class="text-center btn btn-danger"> Delete </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                               
+                                                
+                                                
                                             </td>
                                         </tr>
                                     <?php
