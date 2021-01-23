@@ -50,33 +50,37 @@ require_once('../partials/head.php');
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label for="">User Email</label>
-                                                    <select type="text" required name="auth_email" id="AuthUserEmail" class="form-control basic">
+                                                    <select type="text" required name="auth_email" id="AuthUserEmail" onchange="getAuthUserName(this.value);" class="form-control basic">
                                                         <option>Select User Email</option>
+                                                        <?php
+                                                        /* Select Users Which Has No Auth Permissions Or Auth Permissions Are Revoked */
+                                                        $ret = "SELECT * FROM `users` WHERE auth_status != 'Can_Login' ";
+                                                        $stmt = $mysqli->prepare($ret);
+                                                        $stmt->execute(); //ok
+                                                        $res = $stmt->get_result();
+                                                        while ($Users = $res->fetch_object()) {
+                                                        ?>
+                                                            <option><?php echo $Users->email; ?></option>
 
-                                                        <option></option>
-
+                                                        <?php } ?>
                                                     </select>
                                                     <!-- Hide This -->
                                                     <input type="hidden" required name="auth_id" value="<?php echo $ID; ?>" class="form-control">
                                                     <input type="hidden" required name="auth_status" value="Can_Login" class="form-control">
 
                                                 </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Name</label>
-                                                    <input type="text" id="AuthUserName" required name="national_idno" class="form-control">
-                                                </div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-8">
                                                     <label for="">Auth Password</label>
                                                     <input type="password" required name="auth_password" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Auth Permissions</label>
                                                     <select type="text" required name="sex" class="form-control basic">
-                                                        <option value="1">Administrator</option>
                                                         <option value="0">Registrar</option>
+                                                        <option value="1">Administrator</option>
                                                     </select>
                                                 </div>
                                             </div>
