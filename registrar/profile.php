@@ -32,9 +32,7 @@ if (isset($_POST['update_profile'])) {
     if (!$error) {
         $id = $_POST['id'];
         $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $national_idno  = $_POST['national_idno'];
+     
         $addr = $_POST['addr'];
         $sex = $_POST['sex'];
         $updated_at = date('d M Y');
