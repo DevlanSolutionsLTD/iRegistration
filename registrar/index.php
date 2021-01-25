@@ -28,8 +28,6 @@ require_once('../partials/head.php');
     <div class="login-box">
         <div class="login-logo">
             <a href="index.php"><b>i</b>Registration</a>
-            <br>
-            <small class="text-center">Births And Deaths Registration Information System</small>
         </div>
         <!-- /.login-logo -->
         <div class="card">
