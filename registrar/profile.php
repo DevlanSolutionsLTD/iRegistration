@@ -3,7 +3,7 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../partials/analytics.php');
-check_login();
+registrar_check_login();
 
 /* Update Logged In User */
 if (isset($_POST['update_profile'])) {

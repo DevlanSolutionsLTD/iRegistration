@@ -4,6 +4,8 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 require_once('../partials/head.php');
+registrar_check_login();
+
 
 ?>
 
