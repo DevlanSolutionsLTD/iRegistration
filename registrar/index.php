@@ -4,7 +4,7 @@ include('../config/config.php');
 
 if (isset($_POST['login'])) {
     $auth_email = $_POST['auth_email'];
-    $auth_permission = 'Administrator';
+    $auth_permission = 'Registrar';
     $auth_password = sha1(md5($_POST['auth_password'])); //double encrypt to increase security
     $stmt = $mysqli->prepare("SELECT auth_email, auth_password, auth_permission, auth_id  FROM authentication  WHERE auth_email =? AND auth_password =? AND auth_permission = ?");
     $stmt->bind_param('ssi', $auth_email, $auth_password, $auth_permission); //bind fetched parameters
@@ -19,6 +19,8 @@ if (isset($_POST['login'])) {
         $err = "Access Denied Please Check Your Credentials";
     }
 }
+
+
 require_once('../partials/head.php');
 ?>
 
@@ -32,7 +34,7 @@ require_once('../partials/head.php');
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to iRegistration</p>
+                <p class="login-box-msg">Sign in to iRegistration</p>
                 <form method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="auth_email" class="form-control" placeholder="Email">
